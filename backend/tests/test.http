@@ -1,0 +1,23 @@
+### Create item
+
+# curl -X POST http://localhost:3000/api/items
+#  -H "Content-Type: application/json"
+#  -d '{"name": "Sample Item"}'
+POST http://localhost:3000/api/items
+Content-Type: application/json
+
+{
+  "name": "Sample Item 1"
+}
+
+### Create another item
+POST http://localhost:3000/api/items
+Content-Type: application/json
+
+{
+  "name": "Sample Item 2"
+}
+
+### GET item
+GET http://localhost:3000/api/items
+
