@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "vite",
         "prod": "npm run build && npm run lint",
-        "lint:staged5": "npm run lint-staged",
+        "lint:staged": "npm run lint-staged",
         "-----": "echo 0",
         "lint-staged": "lint-staged",
         "build": "tsc -b && vite build",

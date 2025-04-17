@@ -1,6 +1,6 @@
 {
     "name": "poker-planning-2",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
         "start": "cd backend && npm run start",
@@ -11,7 +11,7 @@
         "after-install": "cd frontend && npm i && cd .. && cd backend && npm i",
         "after-ci": "cd frontend && npm ci && cd .. && cd backend && npm ci",
         "patch-version": "node build.helper.mjs --updatePatchVersion && git add -A",
-        "lint:staged20": "cd frontend && npm run lint:staged5 && cd .. && cd backend && npm run lint:staged3",
+        "lint:staged": "cd frontend && npm run lint:staged && cd .. && cd backend && npm run lint:staged",
         "update-git-hooks": "simple-git-hooks",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -24,6 +24,6 @@
         "common"
     ],
     "simple-git-hooks": {
-        "pre-commit": "npm run lint:staged20 && npm run patch-version"
+        "pre-commit": "npm run lint:staged && npm run patch-version"
     }
 }

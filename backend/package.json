@@ -7,7 +7,7 @@
         "dev": "nodemon",
         "prod": "npm run lint && npm run build",
         "start": "node dist/server.js",
-        "lint:staged3": "npm run lint-staged",
+        "lint:staged": "npm run lint-staged",
         "-----": "echo 0",
         "lint-staged": "lint-staged",
         "build": "tsc",
