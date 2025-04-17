@@ -2,7 +2,6 @@
     "name": "backend",
     "version": "0.0.1",
     "license": "ISC",
-    "type": "module",
     "scripts": {
         "dev": "nodemon",
         "prod": "npm run lint && npm run build",

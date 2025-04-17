@@ -1,12 +1,13 @@
 {
     "name": "poker-planning-2",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
-        "start": "cd backend && npm run start",
         "dev:fe": "cd frontend && npm run dev",
         "dev:be": "cd backend && npm run dev",
-        "prod": "cd frontend && npm run prod && cd .. && cd backend && npm run prod && npm run copy-statics",
+        "start": "cd backend && npm run start",
+        "prod": "cd frontend && npm run prod && cd .. && cd backend && npm run prod && cd .. && npm run copy-statics",
+        "-----": "echo 0",
         "copy-statics": "node build.helper.mjs --copyStatics",
         "after-install": "cd frontend && npm i && cd .. && cd backend && npm i",
         "after-ci": "cd frontend && npm ci && cd .. && cd backend && npm ci",

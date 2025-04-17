@@ -4,4 +4,5 @@
 * How to create node.js+express+typescript - https://blog.logrocket.com/express-typescript-node/
 
 
-[ ] docker and deploy
+[ ] mui kit
+[ ] cache and zip in node

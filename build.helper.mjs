@@ -30,5 +30,6 @@ function updatePatchVersion() {
 
 function copyStatics() {
     fs.cpSync("frontend/dist", "backend/dist/public", {recursive: true});
+    // fs.cpSync("frontend/dist", "backend/public", {recursive: true});
 }
 
