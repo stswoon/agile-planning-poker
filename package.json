@@ -11,20 +11,11 @@
         "after-install": "cd frontend && npm i && cd .. && cd backend && npm i",
         "after-ci": "cd frontend && npm ci && cd .. && cd backend && npm ci",
         "patch-version": "node build.helper.mjs --updatePatchVersion && git add -A",
-        "lint:staged2": "cd frontend && npm run lint:staged5 && cd .. && cd backend && npm run lint:staged3",
+        "lint:staged20": "cd frontend && npm run lint:staged5 && cd .. && cd backend && npm run lint:staged3",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "license": "ISC",
     "devDependencies": {
-        "@types/express": "^5.0.1",
-        "@types/node": "^22.14.1",
-        "dotenv": "^16.5.0",
-        "express": "^5.1.0",
-        "install": "^0.13.0",
-        "nodemon": "^3.1.9",
-        "npm": "^11.3.0",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.8.3",
         "simple-git-hooks": "^2.12.1",
         "minimist": "^1.2.8"
     },
@@ -32,6 +23,6 @@
         "common"
     ],
     "simple-git-hooks": {
-        "pre-commit": "npm run patch-version"
+        "pre-commit": "echo 0"
     }
 }
