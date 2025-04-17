@@ -7,3 +7,4 @@
 [ ] mui kit
 [ ] cache and zip in node
 [ ] public gateway
+[ ] version in html
