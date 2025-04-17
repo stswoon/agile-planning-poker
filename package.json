@@ -23,6 +23,6 @@
         "common"
     ],
     "simple-git-hooks": {
-        "pre-commit": "echo 0"
+        "pre-commit": "npm run lint:stage20 && npm run patch-version2"
     }
 }
