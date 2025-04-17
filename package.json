@@ -1,8 +1,17 @@
 {
     "name": "poker-planning-2",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
+        "start": "cd backend && npm run start",
+        "dev:fe": "cd frontend && npm run dev",
+        "dev:be": "cd backend && npm run dev",
+        "prod": "cd frontend && npm run prod && cd .. && cd backend && npm run prod && npm run copy-statics",
+        "copy-statics": "node build.helper.mjs --copyStatics",
+        "after-install": "cd frontend && npm i && cd .. && cd backend && npm i",
+        "after-ci": "cd frontend && npm ci && cd .. && cd backend && npm ci",
+        "patch-version": "node build.helper.mjs --updatePatchVersion && git add -A",
+        "lint:staged2": "cd frontend && npm run lint:staged5 && cd .. && cd backend && npm run lint:staged3",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "license": "ISC",
@@ -15,9 +24,14 @@
         "nodemon": "^3.1.9",
         "npm": "^11.3.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "simple-git-hooks": "^2.12.1",
+        "minimist": "^1.2.8"
     },
     "workspaces": [
         "common"
-    ]
+    ],
+    "simple-git-hooks": {
+        "pre-commit": "npm run patch-version"
+    }
 }

@@ -1,13 +1,20 @@
 {
-    "name": "poker-planning-2__backend",
+    "name": "backend",
     "version": "0.0.1",
     "license": "ISC",
-    "main": "index.js",
+    "type": "module",
     "scripts": {
-        "build": "tsc",
-        "start": "node dist/server.js",
         "dev": "nodemon",
-        "lint": "eslint 'src/**/*.ts'",
+        "prod": "npm run lint && npm run build",
+        "start": "node dist/server.js",
+        "lint:staged3": "npm run lint-staged",
+        "-----": "echo 0",
+        "lint-staged": "lint-staged",
+        "build": "tsc",
+        "lint": "npm run lint:eslint && npm run lint:prettier",
+        "lint:eslint": "eslint .",
+        "lint:prettier": "prettier --check src/.",
+        "lint:prettier:fix": "prettier --write src/.",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
@@ -23,9 +30,17 @@
         "eslint-config-prettier": "^10.1.2",
         "nodemon": "^3.1.9",
         "prettier": "^3.5.3",
-        "simple-git-hooks": "^2.12.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
-        "typescript-eslint": "^8.26.1"
+        "typescript-eslint": "^8.26.1",
+        "lint-staged": "^15.5.1"
+    },
+    "lint-staged": {
+        "**/*.{ts,css,json}": [
+            "prettier --write"
+        ],
+        "**/*.{ts}": [
+            "eslint"
+        ]
     }
 }

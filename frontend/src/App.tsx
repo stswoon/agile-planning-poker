@@ -3,8 +3,6 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { Item } from "common/models/item.model.ts";
 
-
-
 function App() {
     const [items, setItems] = useState<Item[]>([]);
 
