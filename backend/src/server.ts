@@ -3,13 +3,20 @@ import config from "./config/config";
 import { errorHandler } from "./middlewares/errorHandler";
 import { itemRouter } from "./controllers/item.controller";
 import cors from "cors";
+import compress from "compression";
+import { setStaticFilesCacheHeaders } from "./utils/staticFilesCacheHeaders.util";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.use(express.static(__dirname + "/public", { extensions: ["html"] }));
+app.use(compress());
+app.use(
+    express.static(__dirname + "/public", {
+        extensions: ["html"],
+        setHeaders: setStaticFilesCacheHeaders,
+    }),
+);
 app.get("/health", (_, res) => {
     res.send("OK");
 });
