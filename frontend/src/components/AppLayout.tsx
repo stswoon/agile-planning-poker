@@ -9,8 +9,7 @@ const AppLayout: FC<PropsWithChildren> = ({ children }) => {
                 minWidth: "340px",
                 width: "100vw",
                 height: "100vh",
-                background:
-                    "radial-gradient(circle, rgba(246,154,13,0.9) 20%, rgba(255,255,255,1) 100%)",
+                background: "radial-gradient(circle, rgba(246,154,13,0.9) 20%, rgba(255,255,255,1) 100%)",
             }}
         >
             <AppToolbar />

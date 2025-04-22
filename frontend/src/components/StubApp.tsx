@@ -58,9 +58,7 @@ function StubApp() {
                 <img src={reactLogo} className="logo react" alt="React logo" />
             </div>
 
-            <button onClick={() => createRandomItem()}>
-                Create random item
-            </button>
+            <button onClick={() => createRandomItem()}>Create random item</button>
 
             <h2>All items:</h2>
             <div>

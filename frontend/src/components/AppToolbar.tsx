@@ -28,12 +28,7 @@ const AppToolbar: FC = () => (
                 </Grid>
 
                 <Grid size={{ mobile: 12, tablet: 6 }}>
-                    <Stack
-                        spacing={1}
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="right"
-                    >
+                    <Stack spacing={1} direction="row" alignItems="center" justifyContent="right">
                         <Typography variant="subtitle1" noWrap>
                             {strings.header.seeAlso}
                         </Typography>
