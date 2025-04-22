@@ -1,12 +1,15 @@
 import express from "express";
-import config from "./config/config";
-import { errorHandler } from "./middlewares/errorHandler";
-import { itemRouter } from "./controllers/item.controller";
 import cors from "cors";
 import compress from "compression";
-import { setStaticFilesCacheHeaders } from "./utils/staticFilesCacheHeaders.util";
+import expressWs from "express-ws";
+import { envConfig } from "./utils/envConfig";
+import { errorHandlerMiddleware } from "./utils/errorHandler.middleware";
+import { setStaticFilesCacheHeaders } from "./utils/staticFilesCacheHeaders";
+import { wsRoomRouter } from "./controllers/room.ws-controller";
+import { healthRouter } from "./controllers/health.controller";
 
 const app = express();
+const appWs = expressWs(app);
 
 app.use(cors());
 app.use(express.json());
@@ -17,20 +20,21 @@ app.use(
         setHeaders: setStaticFilesCacheHeaders,
     }),
 );
-app.get("/health", (_, res) => {
-    res.send("OK");
-});
+app.get("/health", healthRouter);
 
 // Routes
-app.use("/api/items", itemRouter);
+// app.use("/api/items", itemRouter);
+
+// WS Routes
+appWs.app.ws("/api/room", wsRoomRouter);
 
 // Global error handler (should be after routes)
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
-app.listen(config.port, (error) => {
+app.listen(envConfig.port, (error) => {
     if (error) {
-        console.log("Fail to start server", error);
+        console.error("Fail to start server", error);
         throw error;
     }
-    console.log(`Server running on port ${config.port}`);
+    console.log(`Server running on port ${envConfig.port}`);
 });

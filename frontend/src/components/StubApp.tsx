@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import reactLogo from "../assets/react.svg";
-import { Item } from "common/models/item.model.ts";
+import { Item } from "common/models/room.model.ts";
 import { Typography } from "@mui/material";
 import { ROUTES } from "../constants/routes.ts";
 
