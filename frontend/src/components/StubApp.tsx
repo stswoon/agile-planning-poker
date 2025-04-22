@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import reactLogo from "../assets/react.svg";
-import { Item } from "common/models/room.model.ts";
 import { Typography } from "@mui/material";
 import { ROUTES } from "../constants/routes.ts";
+
+type Item = unknown;
 
 function StubApp() {
     const [items, setItems] = useState<Item[]>([]);
