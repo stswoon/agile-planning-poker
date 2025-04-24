@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { AppBar, Grid, Link, Stack, Toolbar, Typography } from "@mui/material";
-import { strings } from "../constants/strings.ts";
+import { strings } from "../../constants/strings.ts";
 
 const AppToolbar: FC = () => (
     <AppBar position="absolute" color="transparent">

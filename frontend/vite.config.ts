@@ -12,6 +12,7 @@ export default defineConfig((configEnv) => {
             __APP_VERSION__: JSON.stringify(mainPackageJson.version),
             // __API_DOMAIN__: env.API_DOMAIN ?? "qwe",
             __API_DOMAIN__: JSON.stringify(env.API_DOMAIN ?? ""),
+            __DEV_MODE__: JSON.stringify(configEnv.mode === "development"),
         },
     };
 });

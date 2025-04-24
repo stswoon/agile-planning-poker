@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import reactLogo from "../assets/react.svg";
+import reactLogo from "./assets/react.svg";
 import { Typography } from "@mui/material";
-import { ROUTES } from "../constants/routes.ts";
+import { routes } from "./constants/routes.ts";
 
 type Item = unknown;
 
@@ -9,7 +9,7 @@ function StubApp() {
     const [items, setItems] = useState<Item[]>([]);
 
     const getItems = useCallback(() => {
-        fetch(ROUTES.items)
+        fetch(routes.items)
             .then((response) => response.json())
             .then((items: Item[]) => {
                 console.log("Success:", items);
@@ -32,7 +32,7 @@ function StubApp() {
             date: new Date().getTime(),
         };
 
-        fetch(ROUTES.items, {
+        fetch(routes.items, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newRandomItem),
