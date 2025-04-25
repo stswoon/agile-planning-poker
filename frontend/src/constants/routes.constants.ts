@@ -3,8 +3,6 @@
 import { RoomId, UserId } from "common";
 
 export const routes = {
-    items: __API_DOMAIN__ + "/api/items",
-
     home: "/",
     room: (id: RoomId) => `room/${id}`,
 
