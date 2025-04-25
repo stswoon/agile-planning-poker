@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import { muiTheme } from "./constants/muiTheme.ts";
+import { muiTheme } from "./constants/muiTheme.constants.ts";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { memo } from "react";
 import Home from "./modules/home/Home.tsx";

@@ -1,4 +1,6 @@
 export type UserAction<T> = {
-    type: string
+    type: "flipCards" | "clearCards" | "vote" | "changeName"
     payload: T
 };
+
+//TODO different UserAction

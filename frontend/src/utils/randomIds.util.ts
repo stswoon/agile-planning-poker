@@ -1,5 +1,6 @@
 import { uniqueNamesGenerator, adjectives, colors, animals, starWars } from "unique-names-generator";
 import { capitalizeFirstLetter } from "./common.util.ts";
+import shortUuid from "short-uuid";
 
 export const getRandomRoomId = (): string =>
     uniqueNamesGenerator({
@@ -17,4 +18,5 @@ export const getRandomUserName = (): string =>
         }),
     );
 
-export const getRandomUserId = (): string => crypto.randomUUID();
+// export const getRandomUserId = (): string => crypto.randomUUID();
+export const getRandomUserId = (): string => shortUuid.generate();

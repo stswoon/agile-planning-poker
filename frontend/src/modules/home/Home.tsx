@@ -1,10 +1,10 @@
 import { ChangeEvent, memo, useCallback, useEffect } from "react";
 import { useUserStore } from "../../stores/user.store.ts";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { strings } from "../../constants/strings.ts";
+import { strings } from "../../constants/strings.constants.ts";
 import { getRandomRoomId } from "../../utils/randomIds.util.ts";
 import { useNavigate } from "react-router";
-import { routes } from "../../constants/routes.ts";
+import { routes } from "../../constants/routes.constants.ts";
 import CenterVertical from "../../components/CenterVertical.tsx";
 
 const Home = () => {

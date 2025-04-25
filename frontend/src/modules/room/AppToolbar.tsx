@@ -1,6 +1,5 @@
 import { FC, memo } from "react";
-import { AppBar, Grid, Link, Stack, Toolbar, Typography } from "@mui/material";
-import { strings } from "../../constants/strings.ts";
+import { AppBar, Grid, Stack, Toolbar, Typography } from "@mui/material";
 
 const AppToolbar: FC = () => (
     <AppBar position="absolute" color="transparent">
@@ -17,11 +16,11 @@ const AppToolbar: FC = () => (
                 <Grid size={{ mobile: 12, tablet: 6 }}>
                     <Stack spacing={1} direction="row" alignItems="center">
                         <Typography variant="subtitle1" noWrap>
-                            {strings.header.appName}
+                            {/*{stringsConstants.header.appName}*/}
                         </Typography>
 
                         <Typography variant="subtitle2" noWrap>
-                            {strings.header.appV}
+                            {/*{stringsConstants.header.appV}*/}
                             {__APP_VERSION__}
                         </Typography>
                     </Stack>
@@ -30,12 +29,12 @@ const AppToolbar: FC = () => (
                 <Grid size={{ mobile: 12, tablet: 6 }}>
                     <Stack spacing={1} direction="row" alignItems="center" justifyContent="right">
                         <Typography variant="subtitle1" noWrap>
-                            {strings.header.seeAlso}
+                            {/*{stringsConstants.header.seeAlso}*/}
                         </Typography>
 
-                        <Link variant="subtitle2" href={strings.header.link}>
-                            {strings.header.link}
-                        </Link>
+                        {/*<Link variant="subtitle2" href={stringsConstants.header.link}>*/}
+                        {/*    {stringsConstants.header.link}*/}
+                        {/*</Link>*/}
                     </Stack>
                 </Grid>
             </Grid>

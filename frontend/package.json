@@ -8,6 +8,7 @@
         "prod": "npm run build && npm run lint",
         "lint:staged": "npm run lint-staged",
         "-----": "echo 0",
+        "preview-dist": "vite preview",
         "lint-staged": "lint-staged",
         "build": "tsc -b && vite build",
         "lint": "npm run lint:eslint && npm run lint:prettier",
@@ -24,7 +25,8 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-router": "^7.5.2",
-        "zustand": "^5.0.3"
+        "zustand": "^5.0.3",
+        "short-uuid": "^5.2.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",

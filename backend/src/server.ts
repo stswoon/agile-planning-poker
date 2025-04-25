@@ -28,7 +28,7 @@ app.get("/health", healthRouter);
 // WS Routes
 appWs.app.ws("/api/room", wsRoomRouter);
 
-// Global error handler (should be after routes)
+// Global error handler (should be after routesConstants)
 app.use(errorHandlerMiddleware);
 
 app.listen(envConfig.port, (error) => {
