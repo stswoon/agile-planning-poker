@@ -1,30 +1,30 @@
-import { FC, memo, PropsWithChildren } from "react";
-import { Box } from "@mui/material";
-import AppToolbar from "./AppToolbar.tsx";
+import { Box, Stack } from "@mui/material";
+import { FC, memo, ReactElement } from "react";
 
-const AppLayout: FC<PropsWithChildren> = ({ children }) => {
+export interface AppLayoutType {
+    cardTable: ReactElement;
+    cardDeck: ReactElement;
+    gameMenu: ReactElement;
+}
+
+const AppLayout: FC<AppLayoutType> = ({ cardTable, cardDeck, gameMenu }) => {
     return (
         <Box
             sx={{
-                minWidth: "340px",
+                minWidth: "1000px",
+                minHeight: "700px",
                 width: "100vw",
-                height: "100vh",
-                background: "radial-gradient(circle, rgba(246,154,13,0.9) 20%, rgba(255,255,255,1) 100%)",
+                height: "98vh", //to save on horizontal scroll
+                // background: "radial-gradient(circle, rgba(246,154,13,0.9) 20%, rgba(255,255,255,1) 100%)",
             }}
         >
-            <AppToolbar />
-            <Box
-                sx={{
-                    padding: "64px 8px 8px 8px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
-                }}
-                paddingTop={3}
-            >
-                {children}
-            </Box>
+            <Stack direction="row" sx={{ height: "100%" }}>
+                <Box sx={{ width: "80%", height: "100%" }}>
+                    <Box sx={{ height: "70%" }}>{cardTable}</Box>
+                    <Box sx={{ height: "30%" }}>{cardDeck}</Box>
+                </Box>
+                <Box sx={{ width: "20%", height: "100%" }}>{gameMenu}</Box>
+            </Stack>
         </Box>
     );
 };

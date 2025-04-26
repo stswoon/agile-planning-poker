@@ -20,10 +20,7 @@ app.use(
         setHeaders: setStaticFilesCacheHeaders,
     }),
 );
-app.get("/health", healthRouter);
-
-// Routes
-// app.use("/api/items", itemRouter);
+app.use("/health", healthRouter);
 
 // WS Routes
 appWs.app.ws("/api/room", wsRoomRouter);

@@ -18,10 +18,6 @@ const Home = () => {
         console.log(`User name is - ${userName} (${userId})`);
     }, [userId, userName]);
 
-    useEffect(() => {
-
-    }, []);
-
     const createRoom = useCallback(async () => {
         const roomId = getRandomRoomId();
         await navigate(routes.room(roomId));

@@ -4,13 +4,11 @@ import { devtools } from "zustand/middleware";
 import { persist } from "zustand/middleware";
 import { getRandomUserId, getRandomUserName } from "../utils/randomIds.util.ts";
 
-export interface User {
-    id: UserId;
-    name: string;
-}
-
-interface UserStore {
-    localUser: User;
+export interface UserStore {
+    localUser: {
+        id: UserId;
+        name: string;
+    };
     setUserId: (id: UserId) => void;
     setUserName: (name: string) => void;
 }

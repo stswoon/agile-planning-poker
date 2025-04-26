@@ -19,8 +19,8 @@ export interface User {
 }
 
 export interface Vote {
-    // userId: UserId
-    cardValue?: number
+    userId: UserId
+    cardValue: string
     rotateAngle?: number
 }
 
