@@ -33,11 +33,12 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
     return (
         <Drawer
             className="taScoreBoard"
-            // sx={{
-            //     "& .MuiDrawer-paper": {
-            //         padding: "10px",
-            //     },
-            // }}
+            sx={{
+                "& .MuiDrawer-paper": {
+                    width: '320px', //TODO const
+                    padding: "10px",
+                },
+            }}
             variant="permanent"
             anchor="right"
         >
@@ -74,7 +75,7 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
                     <Button variant="outlined" color="success" fullWidth onClick={onFlipCards}>
                         {strings.flipCards}
                     </Button>
-                    <Button variant="outlined" color="success" fullWidth onClick={onClearCards}>
+                    <Button variant="outlined" color="error" fullWidth onClick={onClearCards}>
                         {strings.clearCards}
                     </Button>
                 </ListItem>

@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 const CenterHorizontal: FC<PropsWithChildren> = ({ children }) => (
     <Box
+        className="taCenterHorizontal"
         sx={{
             display: "flex",
             flexDirection: "column",

@@ -66,7 +66,7 @@ const Room = () => {
         <AppLayout
             cardTable={<CardTable />}
             cardDeck={<CardDeck onThrowCard={handleThrowCard} />}
-            gameMenu={
+            scoreBoard={
                 <GameMenu
                     onChangeName={handleChangeName}
                     onLeaveRoom={handleLeaveRoom}
