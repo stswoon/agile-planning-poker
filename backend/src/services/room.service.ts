@@ -8,7 +8,7 @@ export function createOrJoinRoom(ws: WS, roomId: RoomId, userId: UserId, userNam
 }
 
 function executeUserAction(roomId: RoomId, userId: UserId, userAction: UserAction<any>) {
-    const userName = roomRepository.getRoom(userId).users[userId].name;
+    const userName = roomRepository.getRoom(roomId).users[userId].name;
     const { type, payload } = userAction;
 
     if (type === "clearCards") {

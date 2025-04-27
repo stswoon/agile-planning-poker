@@ -34,7 +34,17 @@ const CardDeck: FC<CardDeckProps> = ({ onThrowCard }) => {
             {avCards.map(({ value, cardBack }) => {
                 return (
                     <Box
-                        sx={{ width: "calc(12.5% - 4px)", maxWidth: "144px", margin: "2px", zIndex: 1 }}
+                        sx={{
+                            width: "calc(12.5% - 4px)",
+                            maxWidth: "144px",
+                            margin: "2px",
+                            zIndex: 1,
+
+                            "&:hover": {
+                                transition: "all .05s ease-in",
+                                transform: "translateY(-15px)",
+                            },
+                        }}
                         onClick={() => onThrowCard(value)}
                     >
                         <PockerCard
