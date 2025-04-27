@@ -44,7 +44,7 @@ const Home = () => {
                         }}
                     />
 
-                    <Button variant="contained" size="large" onClick={redirectRoomId ? backToRoom: createRoom}>
+                    <Button variant="contained" size="large" onClick={redirectRoomId ? backToRoom : createRoom}>
                         <Typography variant="h3">{redirectRoomId ? strings.backToRoom : strings.createRoom}</Typography>
                     </Button>
                 </Stack>

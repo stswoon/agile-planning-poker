@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useState } from "react";
-import PockerCard from "./PockerCard.tsx";
+import PockerCard from "./pocker-card/PockerCard.tsx";
 import { Box, Stack } from "@mui/material";
 import { deepCopy } from "../../utils/common.util.ts";
 
@@ -12,7 +12,7 @@ export interface CardDeckProps {
     onThrowCard: (cardValue: number | string) => void;
 }
 
-const CardDeck: FC<CardDeckProps> = ({ onThrowCard }: CardDeckProps) => {
+const CardDeck: FC<CardDeckProps> = ({ onThrowCard }) => {
     const [avCards, setAvCards] = useState<typeof avCardsInit>(avCardsInit);
 
     useEffect(() => {

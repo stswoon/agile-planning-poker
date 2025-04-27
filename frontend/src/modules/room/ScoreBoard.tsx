@@ -35,7 +35,7 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
             className="taScoreBoard"
             sx={{
                 "& .MuiDrawer-paper": {
-                    width: '320px', //TODO const
+                    width: "320px", //TODO const
                     padding: "10px",
                 },
             }}

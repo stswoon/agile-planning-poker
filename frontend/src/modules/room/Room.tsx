@@ -31,7 +31,7 @@ const Room = () => {
     }, [isConnecting, isError, message, setRoom]);
 
     const handleThrowCard = useCallback(
-        (cardValue: string) => {
+        (cardValue: number | string) => {
             console.log("handleThrowCard:" + cardValue);
             const action: VoteUserAction = {
                 type: "vote",
