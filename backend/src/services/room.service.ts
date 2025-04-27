@@ -20,7 +20,7 @@ function executeUserAction(roomId: RoomId, userId: UserId, userAction: UserActio
     } else if (type === "vote") {
         const vote = payload as Vote;
         const rotateAngle = (Math.round(Math.random() * 10) - 5) * 2; //degrees
-        roomRepository.vote(roomId, userId, { cardValue: vote.cardValue, rotateAngle });
+        roomRepository.vote(roomId, userId, { userId, cardValue: vote.cardValue, rotateAngle });
         openCardIfAllVotes(roomId);
     } else {
         console.error(`Unknown user type cation=${type}, ${userName} (${userId}) in room ${roomId}`);

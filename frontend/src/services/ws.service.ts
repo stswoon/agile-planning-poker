@@ -81,10 +81,10 @@ export class WsService {
         this.ws.onclose = (event: CloseEvent) => {
             clearTimeout(wsConnectionTimeoutId);
             if (event.wasClean) {
-                console.error("WS closed normally");
+                console.info("WS closed normally");
             } else {
                 if (this.closedNormally) {
-                    console.error("skip error on normal close");
+                    console.info("skip error on normal close");
                     return;
                 }
                 console.error("WS interrupted");
@@ -104,7 +104,8 @@ export class WsService {
 
         this.ws.onerror = (error: unknown) => {
             clearTimeout(wsHeartbeatTimeoutId);
-            console.error("WS error:" + (error as { message: string }).message);
+            console.debug("WS error:" + (error as { message: string }).message);
+            // this.onError("SYSTEM ERROR: Can't connect to server");
         };
 
         this.ws.onmessage = (event: MessageEvent<string>) => {

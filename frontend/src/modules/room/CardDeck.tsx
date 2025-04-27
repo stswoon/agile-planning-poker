@@ -5,7 +5,7 @@ interface CardDeckProps {
 }
 
 const CardDeck: FC<CardDeckProps> = ({ onThrowCard }: CardDeckProps) => {
-    console.log(onThrowCard)
+    console.debug(onThrowCard)
     return <div>Deck</div>;
 };
 

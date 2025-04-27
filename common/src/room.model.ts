@@ -20,7 +20,7 @@ export interface User {
 
 export interface Vote {
     userId: UserId
-    cardValue: string
+    cardValue?: string | number
     rotateAngle?: number
 }
 

@@ -1,4 +1,16 @@
 export const strings = {
     enterName: "Enter your name",
     createRoom: "Create Room",
+    backToRoom: "Back to Room",
+    appName: "Planning Poker",
+    appVersionPrefix: "v.",
+    leaveRoom: "Leave Room",
+    changeName: "Change Name",
+    donate: "Donate",
+    flipCards: "Flip Cards",
+    clearCards: "Clear Cards",
+    noCard: "No Card",
+    hiddenCardValue: "???",
+    average: "Average: ",
+    roomName: "Room: ",
 };

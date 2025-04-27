@@ -15,7 +15,10 @@ export interface RoomStore {
 export const useRoomStore = create<RoomStore>()(
     devtools(
         (set) => ({
-            room: undefined,
+            room: {
+                votes: {},
+                users: {},
+            },
 
             setRoom: (newRoom: RoomExtended) =>
                 set(() => {

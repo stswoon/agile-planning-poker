@@ -3,12 +3,15 @@ import { useUserStore } from "../../stores/user.store.ts";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { strings } from "../../constants/strings.constants.ts";
 import { getRandomRoomId } from "../../utils/randomIds.util.ts";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { routes } from "../../constants/routes.constants.ts";
 import CenterVertical from "../../components/CenterVertical.tsx";
 
 const Home = () => {
     const navigate = useNavigate();
+
+    const [searchParams] = useSearchParams();
+    const redirectRoomId = searchParams.get("redirectRoomId");
 
     const userId = useUserStore((state) => state.localUser.id);
     const userName = useUserStore((state) => state.localUser.name);
@@ -23,11 +26,16 @@ const Home = () => {
         await navigate(routes.room(roomId));
     }, [navigate]);
 
+    const backToRoom = useCallback(async () => {
+        if (redirectRoomId) {
+            await navigate(routes.room(redirectRoomId));
+        }
+    }, [navigate, redirectRoomId]);
+
     return (
         <Box sx={{ height: "100vh" }}>
             <CenterVertical>
                 <Stack direction="column" gap={2}>
-
                     <TextField
                         label={strings.enterName}
                         value={userName}
@@ -36,10 +44,9 @@ const Home = () => {
                         }}
                     />
 
-                    <Button variant="contained" size="large" onClick={createRoom}>
-                        <Typography variant="h3">{strings.createRoom}</Typography>
+                    <Button variant="contained" size="large" onClick={redirectRoomId ? backToRoom: createRoom}>
+                        <Typography variant="h3">{redirectRoomId ? strings.backToRoom : strings.createRoom}</Typography>
                     </Button>
-
                 </Stack>
             </CenterVertical>
         </Box>

@@ -5,11 +5,11 @@ export interface UserAction<T> {
     payload: T;
 }
 
-export interface FlipCardUserAction extends UserAction<never> {
+export interface FlipCardUserAction extends Omit<UserAction<never>, 'payload'>  {
     type: "flipCards";
 }
 
-export interface ClearCardsUserAction extends UserAction<never> {
+export interface ClearCardsUserAction extends Omit<UserAction<never>, 'payload'> {
     type: "clearCards";
 }
 

@@ -1,6 +1,6 @@
 {
     "name": "poker-planning-2",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
         "dev:fe": "cd frontend && npm run dev",

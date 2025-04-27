@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useUserStore } from "../../stores/user.store.ts";
 import { useWebSocket } from "../../hooks/useWebSocket.hook.ts";
 import { routes } from "../../constants/routes.constants.ts";
@@ -8,9 +8,10 @@ import { RoomExtended, useRoomStore } from "../../stores/room.store.ts";
 import CardDeck from "./CardDeck.tsx";
 import GameMenu from "./ScoreBoard.tsx";
 import CardTable from "./CardTable.tsx";
-import { VoteUserAction } from "common";
+import { ClearCardsUserAction, FlipCardUserAction, VoteUserAction } from "common";
 
 const Room = () => {
+    const navigate = useNavigate();
     const { roomId } = useParams() as { roomId: string };
 
     const userId = useUserStore((state) => state.localUser.id);
@@ -31,7 +32,7 @@ const Room = () => {
 
     const handleThrowCard = useCallback(
         (cardValue: string) => {
-            console.log(cardValue);
+            console.log("handleThrowCard:" + cardValue);
             const action: VoteUserAction = {
                 type: "vote",
                 payload: { userId, cardValue },
@@ -41,11 +42,38 @@ const Room = () => {
         [sendMessage, userId],
     );
 
+    const handleFlipCards = useCallback(() => {
+        console.log("handleFlipCards");
+        const action: FlipCardUserAction = { type: "flipCards" };
+        sendMessage(JSON.stringify(action));
+    }, [sendMessage]);
+
+    const handleClearCards = useCallback(() => {
+        console.log("handleClearCards");
+        const action: ClearCardsUserAction = { type: "clearCards" };
+        sendMessage(JSON.stringify(action));
+    }, [sendMessage]);
+
+    const handleChangeName = useCallback(() => {
+        navigate(routes.homeWithReturnBuck(roomId));
+    }, [navigate, roomId]);
+
+    const handleLeaveRoom = useCallback(() => {
+        navigate(routes.home);
+    }, [navigate]);
+
     return (
         <AppLayout
             cardTable={<CardTable />}
             cardDeck={<CardDeck onThrowCard={handleThrowCard} />}
-            gameMenu={<GameMenu />}
+            gameMenu={
+                <GameMenu
+                    onChangeName={handleChangeName}
+                    onLeaveRoom={handleLeaveRoom}
+                    onFlipCards={handleFlipCards}
+                    onClearCards={handleClearCards}
+                />
+            }
         />
     );
 

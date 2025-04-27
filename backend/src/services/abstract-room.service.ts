@@ -46,41 +46,55 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
     const userName = roomRepository.getRoom(roomId).users[userId].name;
     console.log(`Subscribe on user actions for ${userName} (${userId}) in room ${roomId}`);
     ws.on("message", (msg: string): void => {
-        if (msg === "H") {
-            //console.log(`client H for ${userName} (${userId})`);
-        } else {
-            //TODO: app crushed on JSON.parse('test')
-            const userAction = JSON.parse(msg);
-            userActionCallback(roomId, userId, userAction);
+        try {
+            if (msg === "H") {
+                //console.log(`client H for ${userName} (${userId})`);
+            } else {
+                const userAction = JSON.parse(msg);
+                userActionCallback(roomId, userId, userAction);
+            }
+            broadcastRoom(roomId);
+        } catch (e) {
+            console.error("Failed read message from client");
+            console.error(e);
         }
-        broadcastRoom(roomId);
     });
     ws.on("close", (a, b) => {
-        console.log(`WS for user (${userName} : ${userId}) in room (${roomId}) was closed`);
-        console.log(a, b);
-        roomUserWsMappingService.removeUser(roomId, userId);
-        roomRepository.setUserActivity(roomId, userId, false);
-        userLateRemoveTimers[userId] = setTimeout(() => {
-            if (!userLateRemoveTimers[userId]) {
-                console.warn(
-                    `Timeout for userId was cleared so skip deletion user ${userName} (${userId}) from room ${roomId}`,
-                );
-                return;
-            }
+        try {
+            console.log(`WS for user (${userName} : ${userId}) in room (${roomId}) was closed`);
+            console.log(a, b);
+            roomUserWsMappingService.removeUser(roomId, userId);
+            roomRepository.setUserActivity(roomId, userId, false);
+            userLateRemoveTimers[userId] = setTimeout(() => {
+                try {
+                    if (!userLateRemoveTimers[userId]) {
+                        console.warn(
+                            `Timeout for userId was cleared so skip deletion user ${userName} (${userId}) from room ${roomId}`,
+                        );
+                        return;
+                    }
 
-            console.info(`Lazy remove for user (${userName} : ${userId}) in room (${roomId})`);
-            roomRepository.removeUser(roomId, userId);
-            delete userLateRemoveTimers[userId];
+                    console.info(`Lazy remove for user (${userName} : ${userId}) in room (${roomId})`);
+                    roomRepository.removeUser(roomId, userId);
+                    delete userLateRemoveTimers[userId];
 
-            broadcastRoom(roomId);
+                    broadcastRoom(roomId);
 
-            // will remove in startCleanupOldRooms
-            // if (isEmptyRoom(roomId)) {
-            //     console.log(`Room ${roomId} is empty so remove it`);
-            //     roomRepository.removeRoom(roomId);
-            //     roomUserWsMappingService.removeRoom(roomId);
-            // }
-        }, LAZY_REMOVE_TIMEOUT);
+                    // will remove in startCleanupOldRooms
+                    // if (isEmptyRoom(roomId)) {
+                    //     console.log(`Room ${roomId} is empty so remove it`);
+                    //     roomRepository.removeRoom(roomId);
+                    //     roomUserWsMappingService.removeRoom(roomId);
+                    // }
+                } catch (e) {
+                    console.error("Failed read message from client");
+                    console.error(e);
+                }
+            }, LAZY_REMOVE_TIMEOUT);
+        } catch (e) {
+            console.error("Failed read message from client");
+            console.error(e);
+        }
     });
     ws.on("error", (e: any) => {
         console.error(`WS for user ${userName} (${userId}) in room (${roomId}) was closed`);
