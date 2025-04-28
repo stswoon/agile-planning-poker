@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { deepCopy } from "../../utils/common.util.ts";
-import { PokerCard } from "./pocker-card/PokerCard.tsx";
+import { PokerCard } from "./poker-card/PokerCard.tsx";
 
 const availableCardValues = [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 50, "?"];
 const avCardsInit = availableCardValues.map((value) => {
@@ -24,7 +24,7 @@ const CardDeck: FC<CardDeckProps> = ({ onThrowCard }) => {
                     card.cardBack = false;
                     setAvCards(deepCopy(avCardsCopy));
                 },
-                1000 + index * 100,
+                100 + index * 100,
             );
         });
     }, []);
@@ -36,7 +36,7 @@ const CardDeck: FC<CardDeckProps> = ({ onThrowCard }) => {
                     <Box
                         sx={{
                             width: "calc(12.5% - 4px)",
-                            maxWidth: "144px",
+                            maxWidth: "120px",
                             margin: "2px",
                             zIndex: 1,
 

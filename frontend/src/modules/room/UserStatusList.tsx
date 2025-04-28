@@ -35,9 +35,9 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards }) =>
     const displayCardValue = useCallback(
         (cardValue?: string | number) => {
             if (showCards) {
-                return cardValue ? cardValue : strings.noCard;
+                return cardValue !== undefined ? cardValue : strings.noCard;
             } else {
-                return cardValue ? strings.hiddenCardValue : strings.noCard;
+                return cardValue  !== undefined ? strings.hiddenCardValue : strings.noCard;
             }
         },
         [showCards],

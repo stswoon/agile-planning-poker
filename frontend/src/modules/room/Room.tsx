@@ -7,7 +7,7 @@ import AppLayout from "./AppLayout.tsx";
 import { RoomExtended, useRoomStore } from "../../stores/room.store.ts";
 import CardDeck from "./CardDeck.tsx";
 import GameMenu from "./ScoreBoard.tsx";
-import CardTable from "./CardTable.tsx";
+import CardTable from "./card-table/CardTable.tsx";
 import { ClearCardsUserAction, FlipCardUserAction, VoteUserAction } from "common";
 
 const Room = () => {

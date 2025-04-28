@@ -14,17 +14,15 @@ const AppLayout: FC<AppLayoutType> = ({ cardTable, cardDeck, scoreBoard }) => {
             sx={{
                 minWidth: "1000px",
                 minHeight: "700px",
-                // width: "100vw",
                 height: "98vh", //to save on horizontal scroll
-                // background: "radial-gradient(circle, rgba(246,154,13,0.9) 20%, rgba(255,255,255,1) 100%)",
             }}
         >
             <Stack direction="row" sx={{ height: "100%" }}>
                 <Box sx={{ width: "calc(100% - 320px)", height: "100%" }}>
-                    <Box sx={{ height: "59%" }}>
+                    <Box sx={{ height: "70%" }}>
                         <CenterHorizontal>{cardTable}</CenterHorizontal>
                     </Box>
-                    <Box sx={{ height: "41%" }}>
+                    <Box sx={{ height: "30%" }}>
                         <CenterHorizontal>{cardDeck}</CenterHorizontal>
                     </Box>
                 </Box>
