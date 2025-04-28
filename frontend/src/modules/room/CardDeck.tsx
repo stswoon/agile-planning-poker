@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useState } from "react";
-import PockerCard from "./pocker-card/PockerCard.tsx";
 import { Box, Stack } from "@mui/material";
 import { deepCopy } from "../../utils/common.util.ts";
+import { PokerCard } from "./pocker-card/PokerCard.tsx";
 
 const availableCardValues = [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 50, "?"];
 const avCardsInit = availableCardValues.map((value) => {
@@ -47,12 +47,12 @@ const CardDeck: FC<CardDeckProps> = ({ onThrowCard }) => {
                         }}
                         onClick={() => onThrowCard(value)}
                     >
-                        <PockerCard
+                        <PokerCard
                             key={value}
                             value={value}
                             displayValue={value === 0.5 ? "½" : undefined}
                             cardBack={cardBack}
-                        ></PockerCard>
+                        ></PokerCard>
                     </Box>
                 );
             })}
