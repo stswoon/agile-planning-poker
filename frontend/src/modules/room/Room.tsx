@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router";
 import { useUserStore } from "../../stores/user.store.ts";
 import { useWebSocket } from "../../hooks/useWebSocket.hook.ts";
 import { routes } from "../../constants/routes.constants.ts";
-import AppLayout from "./AppLayout.tsx";
+import RoomLayout from "./RoomLayout.tsx";
 import { RoomExtended, useRoomStore } from "../../stores/room.store.ts";
 import CardDeck from "./CardDeck.tsx";
-import GameMenu from "./ScoreBoard.tsx";
+import ScoreBoard from "./ScoreBoard.tsx";
 import CardTable from "./card-table/CardTable.tsx";
 import { ClearCardsUserAction, FlipCardUserAction, VoteUserAction } from "common";
 
@@ -63,11 +63,11 @@ const Room = () => {
     }, [navigate]);
 
     return (
-        <AppLayout
+        <RoomLayout
             cardTable={<CardTable />}
             cardDeck={<CardDeck onThrowCard={handleThrowCard} />}
             scoreBoard={
-                <GameMenu
+                <ScoreBoard
                     onChangeName={handleChangeName}
                     onLeaveRoom={handleLeaveRoom}
                     onFlipCards={handleFlipCards}

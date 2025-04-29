@@ -21,12 +21,14 @@ let initialState: Room | undefined = {
     users: {},
 };
 
-const useStubRoom: false | "small" | "big" = "small";
+const useStubRoom: undefined | "small" | "big" = undefined;
 if (useStubRoom === "small") {
     initialState = stubRoom;
 } else if (useStubRoom === "big") {
     initialState = stubBigRoom;
 }
+
+//TODO: side effects with WS to store
 
 export const useRoomStore = create<RoomStore>()(
     devtools(

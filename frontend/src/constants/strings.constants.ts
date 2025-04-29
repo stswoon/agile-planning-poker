@@ -13,4 +13,5 @@ export const strings = {
     hiddenCardValue: "???",
     average: "Average: ",
     roomName: "Room: ",
+    you: "You: ",
 };

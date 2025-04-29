@@ -1,5 +1,5 @@
-import { memo, ReactElement, useMemo } from "react";
-import { Stack } from "@mui/material";
+import { FC, memo, ReactElement, ReactNode, useMemo } from "react";
+import { Box, Stack } from "@mui/material";
 import leftImg from "./left.webp";
 import centerImg from "./center.webp";
 import rightImg from "./right.webp";
@@ -9,9 +9,45 @@ import { PokerCard } from "../poker-card/PokerCard.tsx";
 
 const factorTableHeight = 0.5;
 
+const BoxAnimationUp: FC<{ animationMode: "up" | "down"; children: ReactNode }> = memo(
+    ({ animationMode, children }) => {
+        const shift = 50;
+        return (
+            <Box
+                sx={{
+                    animation: `${animationMode === "up" ? "slideUpAnimation" : "slideDownAnimation"} 1s ease-in`,
+                    "@keyframes slideUpAnimation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: `translateY(${-shift}px)`,
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                    "@keyframes slideDownAnimation": {
+                        "0%": {
+                            opacity: 0,
+                            transform: `translateY(${shift}px)`,
+                        },
+                        "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                        },
+                    },
+                }}
+            >
+                {children}
+            </Box>
+        );
+    },
+);
+
 const CardTable = () => {
     const users = useRoomStore((state) => state.room.users);
     const votes = useRoomStore((state) => state.room.votes);
+    const showCards = useRoomStore((state) => state.room.showCards);
 
     const { usersUp, usersDown } = useMemo(() => {
         const result: { usersUp: ReactElement[]; usersDown: ReactElement[] } = {
@@ -21,9 +57,11 @@ const CardTable = () => {
         Object.values(users).forEach((user, index) => {
             const userOnTable = <UserOnTable key={index} name={user.name} order={index} />;
             if (index % 2 === 0) {
-                result.usersUp.push(userOnTable);
+                const box = <BoxAnimationUp animationMode="up">{userOnTable}</BoxAnimationUp>;
+                result.usersUp.push(box);
             } else {
-                result.usersDown.push(userOnTable);
+                const box = <BoxAnimationUp animationMode="down">{userOnTable}</BoxAnimationUp>;
+                result.usersDown.push(box);
             }
         });
         return result;
@@ -41,12 +79,15 @@ const CardTable = () => {
                     value={vote.cardValue ?? 0}
                     rotateAngle={vote.rotateAngle}
                     nonVisible={vote.cardValue === undefined}
+                    cardBack={!showCards}
                 />
             );
             if (index % 2 === 0) {
-                result.votesUp.push(cardOnTable);
+                const box = <BoxAnimationUp animationMode="up">{cardOnTable}</BoxAnimationUp>;
+                result.votesUp.push(box);
             } else {
-                result.votesDown.push(cardOnTable);
+                const box = <BoxAnimationUp animationMode="down">{cardOnTable}</BoxAnimationUp>;
+                result.votesDown.push(box);
             }
         });
         return result;

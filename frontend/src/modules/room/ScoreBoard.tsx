@@ -57,6 +57,10 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
                         {strings.roomName}
                         {roomId}
                     </Typography>
+                    <Typography>
+                        {strings.you}
+                        {roomId}
+                    </Typography>
                 </ListItem>
                 <ListItem>
                     <Button variant="outlined" color="secondary" onClick={onLeaveRoom}>

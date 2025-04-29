@@ -20,7 +20,13 @@ export interface PokerCardProps {
 
 const PokerCardWithAngle: FC<PokerCardProps> = memo((props) => {
     return (
-        <Box className="taPokerCardFinal" sx={{ transform: `rotate(${props.rotateAngle}deg)` }}>
+        <Box
+            className="taPokerCardFinal"
+            sx={{
+                transition: "transform 0.1s ",
+                transform: `rotate(${props.rotateAngle}deg)`,
+            }}
+        >
             <PokerCardWithAnimation {...props} />
         </Box>
     );

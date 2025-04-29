@@ -55,6 +55,7 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards }) =>
                         <TableRow key={userStatus.userId}>
                             <TableCell>
                                 <Stack direction="row" gap={0.5}>
+                                    {/*TODO: blink*/}
                                     {!userStatus.active && <NoAccountsIcon color="error" fontSize="small" />}
                                     <Typography variant="body2">{userStatus.userName}</Typography>
                                 </Stack>

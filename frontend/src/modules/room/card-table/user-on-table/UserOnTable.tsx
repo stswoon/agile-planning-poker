@@ -23,6 +23,9 @@ export interface UserOnTableProps {
     name: string;
 }
 
+//TODO: move to folder up,
+//TODO: opacity on inactive
+
 const UserOnTable: FC<UserOnTableProps> = ({ order, name }) => {
     const factor = 0.2;
     return (

@@ -8,7 +8,7 @@ export interface AppLayoutType {
     scoreBoard: ReactElement;
 }
 
-const AppLayout: FC<AppLayoutType> = ({ cardTable, cardDeck, scoreBoard }) => {
+const RoomLayout: FC<AppLayoutType> = ({ cardTable, cardDeck, scoreBoard }) => {
     return (
         <Box
             sx={{
@@ -32,4 +32,4 @@ const AppLayout: FC<AppLayoutType> = ({ cardTable, cardDeck, scoreBoard }) => {
     );
 };
 
-export default memo(AppLayout);
+export default memo(RoomLayout);
