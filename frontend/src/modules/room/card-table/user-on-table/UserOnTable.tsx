@@ -24,9 +24,9 @@ export interface UserOnTableProps {
 }
 
 const UserOnTable: FC<UserOnTableProps> = ({ order, name }) => {
-    const factor = 0.3;
+    const factor = 0.2;
     return (
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center" gap={0.5}>
             <img
                 style={{
                     objectFit: "cover",
@@ -37,7 +37,9 @@ const UserOnTable: FC<UserOnTableProps> = ({ order, name }) => {
                 loading="lazy"
                 alt={`Icon for user with order ${order}`}
             />
-            <Typography>{name}</Typography>
+            <Typography width="70px" height={factor * 480 + "px"} overflow="hidden" sx={{ wordBreak: "break-all" }}>
+                {name}
+            </Typography>
         </Stack>
     );
 };

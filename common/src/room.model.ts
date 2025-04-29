@@ -8,8 +8,8 @@ export interface Room {
     createdDate: number;
 
     showCards: boolean;
-    users: JsMap<UserId, User>;
-    votes: JsMap<UserId, Vote>
+    users: JsMap<UserId, User>; //TODO migrate to list
+    votes: JsMap<UserId, Vote>//TODO migrate to list
 }
 
 export interface User {

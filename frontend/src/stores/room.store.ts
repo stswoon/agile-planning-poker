@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { Room } from "common";
 import { devtools } from "zustand/middleware";
+import { stubBigRoom, stubRoom } from "./stubRoom.const.ts";
 
 export interface RoomExtended extends Room {
     isError: boolean;
@@ -12,16 +13,32 @@ export interface RoomStore {
     setRoom: (room: Room) => void;
 }
 
+let initialState: Room | undefined = {
+    id: "",
+    showCards: false,
+    createdDate: new Date().getTime(),
+    votes: {},
+    users: {},
+};
+
+const useStubRoom: false | "small" | "big" = "small";
+if (useStubRoom === "small") {
+    initialState = stubRoom;
+} else if (useStubRoom === "big") {
+    initialState = stubBigRoom;
+}
+
 export const useRoomStore = create<RoomStore>()(
     devtools(
         (set) => ({
-            room: {
-                votes: {},
-                users: {},
-            },
+            room: initialState,
 
             setRoom: (newRoom: RoomExtended) =>
                 set(() => {
+                    if (useStubRoom) {
+                        return {};
+                    }
+
                     return {
                         room: newRoom,
                     };

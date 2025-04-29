@@ -4,7 +4,8 @@ import classNames from "classNames";
 import cardFrontImg from "./card-front.webp";
 import cardBackImg from "./card-back.webp";
 
-const cardSize = { width: "108px", height: "142px" };
+const factor = 0.15;
+const cardSize = { width: factor * 720 + "px", height: factor * 960 + "px" };
 
 export interface PokerCardProps {
     value: string | number;
@@ -12,7 +13,7 @@ export interface PokerCardProps {
     rotateAngle?: number;
     cardBack?: boolean;
 
-    nonVisible?: number;
+    nonVisible?: boolean;
     showAnimation?: boolean;
     flipCardAnimation?: boolean;
 }
@@ -102,7 +103,7 @@ const PokerCardInnerSide: FC<{ label?: string }> = memo(({ label }) => {
 
 const PokerCardFinal: FC<PokerCardProps> = memo((props) => {
     return (
-        <Box className="taPokerCardFinal">
+        <Box className="taPokerCardFinal" visibility={props.nonVisible ? "hidden" : "visible"}>
             <PokerCardWithAngle {...props} />
         </Box>
     );
