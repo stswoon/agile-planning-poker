@@ -91,7 +91,7 @@ const CardTable = () => {
             }
         });
         return result;
-    }, [votes]);
+    }, [showCards, votes]);
 
     return (
         <Stack className="taCardTable">

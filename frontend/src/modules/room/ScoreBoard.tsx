@@ -4,6 +4,7 @@ import { strings } from "../../constants/strings.constants.ts";
 import { routes } from "../../constants/routes.constants.ts";
 import { useRoomStore } from "../../stores/room.store.ts";
 import UserStatusList, { UserStatus } from "./UserStatusList.tsx";
+import { useUserStore } from "../../stores/user.store.ts";
 
 export interface ScoreBoardProps {
     onLeaveRoom: () => void;
@@ -13,6 +14,7 @@ export interface ScoreBoardProps {
 }
 
 const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCards, onClearCards }) => {
+    const currentUserId = useUserStore((state) => state.localUser.id);
     const roomId = useRoomStore((state) => state.room.id);
     const votes = useRoomStore((state) => state.room.votes);
     const users = useRoomStore((state) => state.room.users);
@@ -57,10 +59,6 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
                         {strings.roomName}
                         {roomId}
                     </Typography>
-                    <Typography>
-                        {strings.you}
-                        {roomId}
-                    </Typography>
                 </ListItem>
                 <ListItem>
                     <Button variant="outlined" color="secondary" onClick={onLeaveRoom}>
@@ -87,7 +85,7 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
 
             <Divider />
 
-            <UserStatusList userStatuses={userStatuses} showCards={isShowCards} />
+            <UserStatusList userStatuses={userStatuses} showCards={isShowCards} currentUserId={currentUserId} />
 
             <Divider />
 

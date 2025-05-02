@@ -14,9 +14,10 @@ export interface UserStatus {
 export interface UserStatusListProps {
     userStatuses: UserStatus[];
     showCards: boolean;
+    currentUserId: UserId;
 }
 
-const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards }) => {
+const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards, currentUserId }) => {
     const displayAverage = useMemo(() => {
         if (showCards) {
             const userWithCards = userStatuses.filter((userStatus) => typeof userStatus.cardValue === "number");
@@ -37,7 +38,7 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards }) =>
             if (showCards) {
                 return cardValue !== undefined ? cardValue : strings.noCard;
             } else {
-                return cardValue  !== undefined ? strings.hiddenCardValue : strings.noCard;
+                return cardValue !== undefined ? strings.hiddenCardValue : strings.noCard;
             }
         },
         [showCards],
@@ -57,7 +58,12 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards }) =>
                                 <Stack direction="row" gap={0.5}>
                                     {/*TODO: blink*/}
                                     {!userStatus.active && <NoAccountsIcon color="error" fontSize="small" />}
-                                    <Typography variant="body2">{userStatus.userName}</Typography>
+                                    <Typography
+                                        variant="body2"
+                                        fontWeight={userStatus.userId === currentUserId ? "bold" : undefined}
+                                    >
+                                        {userStatus.userName}
+                                    </Typography>
                                 </Stack>
                             </TableCell>
                             <TableCell align="right">{displayCardValue(userStatus.cardValue)}</TableCell>
