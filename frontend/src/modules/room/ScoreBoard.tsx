@@ -5,6 +5,7 @@ import { routes } from "../../constants/routes.constants.ts";
 import { useRoomStore } from "../../stores/room.store.ts";
 import UserStatusList, { UserStatus } from "./UserStatusList.tsx";
 import { useUserStore } from "../../stores/user.store.ts";
+import YandexAd from "../YandexAd.tsx";
 
 export interface ScoreBoardProps {
     onLeaveRoom: () => void;
@@ -89,7 +90,9 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
 
             <Divider />
 
-            <Box className="AD">TODO</Box>
+            <Box className="AD" paddingTop={1} marginBottom="auto" height={"300px"}>
+                <YandexAd />
+            </Box>
         </Drawer>
     );
 };
