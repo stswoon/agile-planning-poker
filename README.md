@@ -15,3 +15,7 @@ https://poker-planning.stswoon.ru/
 //TODO: js chank warning
 
 //TODO: TS got tot http://localhost:3000/room/red-booby2 or 3
+
+
+- сгенерируй картинку лица человека вид спереди, эта картинка должна быть в мультяшном стиле, она будет использоваться в онлайн html игре, поэтому должна быть рисованной
+- сгенерируй еще 5 лиц
