@@ -93,3 +93,5 @@ const Room = () => {
 export default memo(Room);
 
 //TODO: noyt screens
+//TODO: cookie
+//TODO your name
