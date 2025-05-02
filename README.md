@@ -1,5 +1,7 @@
 # poker-planning-2
 
+https://poker-planning.stswoon.ru/
+
 * How to create vite - https://vite.dev/guide/#scaffolding-your-first-vite-project
 * How to create node.js+express+typescript - https://blog.logrocket.com/express-typescript-node/
 

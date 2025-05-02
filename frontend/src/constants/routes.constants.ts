@@ -12,7 +12,9 @@ export const routes = {
 
     wsRoomApi: (roomId: RoomId, userId: UserId, userName: string) => {
         const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
-        const wsHost = __API_DOMAIN__.replace("http://", "").replace("https://", "") ?? window.location.host;
+        const wsHost = __API_DOMAIN__
+            ? __API_DOMAIN__.replace("http://", "").replace("https://", "")
+            : window.location.host;
         return `${wsProtocol}://${wsHost}/api/room?roomId=${roomId}&userId=${userId}&userName=${userName}`;
     },
 

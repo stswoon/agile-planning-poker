@@ -20,6 +20,9 @@ app.use(
         setHeaders: setStaticFilesCacheHeaders,
     }),
 );
+app.get("/room", (_, res) => {
+    res.sendFile(__dirname + "/public" + "/index.html");
+});
 app.use("/health", healthRouter);
 
 // WS Routes
