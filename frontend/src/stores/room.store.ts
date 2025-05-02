@@ -1,26 +1,25 @@
 import { create } from "zustand";
-import { Room } from "common";
+import { DtoRoom } from "common";
 import { devtools } from "zustand/middleware";
 import { stubBigRoom, stubRoom } from "./stubRoom.const.ts";
 
-export interface RoomExtended extends Room {
+export interface RoomExtended extends DtoRoom {
     isError: boolean;
     isLoading: boolean;
 }
 
 export interface RoomStore {
     room: RoomExtended;
-    setRoom: (room: Room) => void;
+    setRoom: (room: DtoRoom) => void;
 }
 
-let initialState: Room | undefined = {
+let initialState: DtoRoom | undefined = {
     id: "",
     showCards: false,
-    createdDate: new Date().getTime(),
-    votes: {},
-    users: {},
+    usersAndVotes: [],
 };
 
+//TODO: check stub and move it to back??
 const useStubRoom: undefined | "small" | "big" = undefined;
 if (useStubRoom === "small") {
     initialState = stubRoom;

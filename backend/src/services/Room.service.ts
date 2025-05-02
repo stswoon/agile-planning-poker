@@ -1,26 +1,26 @@
-import { RoomId, UserId, UserAction, Vote } from "common";
-import { WS } from "../utils/utils";
-import { abstractCreateOrJoinRoom } from "./abstract-room.service";
-import { roomRepository } from "../repositories/room.repository";
+import { RoomId, UserId, UserAction, UserActionType, isVoteUserAction } from "common";
+import { abstractCreateOrJoinRoom } from "./AbstractRoom.service";
+import { roomRepository } from "../repositories/Room.repository";
+import { WS } from "../models/Ws.model";
 
 export function createOrJoinRoom(ws: WS, roomId: RoomId, userId: UserId, userName: string): void {
     abstractCreateOrJoinRoom(ws, roomId, userId, userName, executeUserAction);
 }
 
-function executeUserAction(roomId: RoomId, userId: UserId, userAction: UserAction<any>) {
+function executeUserAction(roomId: RoomId, userId: UserId, userAction: UserAction<unknown>) {
     const userName = roomRepository.getRoom(roomId).users[userId].name;
-    const { type, payload } = userAction;
+    const { type } = userAction;
 
-    if (type === "clearCards") {
+    if (type === UserActionType.clearCards) {
         roomRepository.clearVotes(roomId);
         roomRepository.setShowCards(roomId, false);
-    } else if (type === "flipCards") {
+    } else if (type === UserActionType.flipCards) {
         const room = roomRepository.getRoom(roomId);
         roomRepository.setShowCards(roomId, !room.showCards);
-    } else if (type === "vote") {
-        const vote = payload as Vote;
+    } else if (isVoteUserAction(userAction)) {
+        const vote = userAction.payload;
         const rotateAngle = (Math.round(Math.random() * 10) - 5) * 2; //degrees
-        roomRepository.vote(roomId, userId, { userId, cardValue: vote.cardValue, rotateAngle });
+        roomRepository.vote(roomId, userId, { cardValue: vote.cardValue, rotateAngle });
         openCardIfAllVotes(roomId);
     } else {
         console.error(`Unknown user type cation=${type}, ${userName} (${userId}) in room ${roomId}`);

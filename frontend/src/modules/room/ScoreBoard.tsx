@@ -1,9 +1,9 @@
-import { FC, memo, useMemo } from "react";
+import { FC, memo } from "react";
 import { Box, Divider, Toolbar, Drawer, Typography, Button, List, ListItem } from "@mui/material";
 import { strings } from "../../constants/strings.constants.ts";
 import { routes } from "../../constants/routes.constants.ts";
 import { useRoomStore } from "../../stores/room.store.ts";
-import UserStatusList, { UserStatus } from "./UserStatusList.tsx";
+import UserStatusList from "./UserStatusList.tsx";
 import { useUserStore } from "../../stores/user.store.ts";
 import YandexAd from "../YandexAd.tsx";
 
@@ -17,21 +17,8 @@ export interface ScoreBoardProps {
 const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCards, onClearCards }) => {
     const currentUserId = useUserStore((state) => state.localUser.id);
     const roomId = useRoomStore((state) => state.room.id);
-    const votes = useRoomStore((state) => state.room.votes);
-    const users = useRoomStore((state) => state.room.users);
+    const usersAndVotes = useRoomStore((state) => state.room.usersAndVotes);
     const isShowCards = useRoomStore((state) => state.room.showCards);
-
-    const userStatuses: UserStatus[] = useMemo(() => {
-        return Object.values(users).map((user) => {
-            const vote = votes[user.id];
-            return {
-                userId: user.id,
-                userName: user.name,
-                active: user.active,
-                cardValue: vote?.cardValue,
-            };
-        });
-    }, [users, votes]);
 
     return (
         <Drawer
@@ -86,7 +73,7 @@ const ScoreBoard: FC<ScoreBoardProps> = ({ onLeaveRoom, onChangeName, onFlipCard
 
             <Divider />
 
-            <UserStatusList userStatuses={userStatuses} showCards={isShowCards} currentUserId={currentUserId} />
+            <UserStatusList usersAndVotes={usersAndVotes} showCards={isShowCards} currentUserId={currentUserId} />
 
             <Divider />
 

@@ -2,12 +2,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-interface EnvConfig {
+interface EnvironmentConfigUtil {
     port: number;
     nodeEnv: string;
 }
 
-const envConfig: EnvConfig = {
+const envConfig: EnvironmentConfigUtil = {
     port: Number(process.env.PORT) || 3000,
     nodeEnv: process.env.NODE_ENV || "development",
 };

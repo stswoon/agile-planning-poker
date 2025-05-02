@@ -1,28 +1,21 @@
-import { UserId } from "common";
+import { UserAndVote, UserId } from "common";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Stack, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import { strings } from "../../constants/strings.constants.ts";
 
-export interface UserStatus {
-    userId: UserId;
-    userName: string;
-    active: boolean;
-    cardValue?: string | number;
-}
-
 export interface UserStatusListProps {
-    userStatuses: UserStatus[];
+    usersAndVotes: UserAndVote[];
     showCards: boolean;
     currentUserId: UserId;
 }
 
-const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards, currentUserId }) => {
+const UserStatusList: FC<UserStatusListProps> = ({ usersAndVotes, showCards, currentUserId }) => {
     const displayAverage = useMemo(() => {
         if (showCards) {
-            const userWithCards = userStatuses.filter((userStatus) => typeof userStatus.cardValue === "number");
+            const userWithCards = usersAndVotes.filter((userAndVote) => typeof userAndVote.vote?.cardValue === "number");
             let average: number = userWithCards.reduce(
-                (acc: number, userStatus: UserStatus) => acc + (userStatus.cardValue as number),
+                (acc: number, userAndVote: UserAndVote) => acc + (userAndVote.vote?.cardValue as number),
                 0,
             );
             average = average / userWithCards.length;
@@ -31,7 +24,7 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards, curr
         } else {
             return strings.hiddenCardValue;
         }
-    }, [showCards, userStatuses]);
+    }, [showCards, usersAndVotes]);
 
     const displayCardValue = useCallback(
         (cardValue?: string | number) => {
@@ -52,21 +45,21 @@ const UserStatusList: FC<UserStatusListProps> = ({ userStatuses, showCards, curr
             </Typography>
             <Table size="small">
                 <TableBody>
-                    {userStatuses.map((userStatus) => (
-                        <TableRow key={userStatus.userId}>
+                    {usersAndVotes.map((userAndVote) => (
+                        <TableRow key={userAndVote.user.id}>
                             <TableCell>
                                 <Stack direction="row" gap={0.5}>
                                     {/*TODO: blink*/}
-                                    {!userStatus.active && <NoAccountsIcon color="error" fontSize="small" />}
+                                    {!userAndVote.user.active && <NoAccountsIcon color="error" fontSize="small" />}
                                     <Typography
                                         variant="body2"
-                                        fontWeight={userStatus.userId === currentUserId ? "bold" : undefined}
+                                        fontWeight={userAndVote.user.id === currentUserId ? "bold" : undefined}
                                     >
-                                        {userStatus.userName}
+                                        {userAndVote.user.name}
                                     </Typography>
                                 </Stack>
                             </TableCell>
-                            <TableCell align="right">{displayCardValue(userStatus.cardValue)}</TableCell>
+                            <TableCell align="right">{displayCardValue(userAndVote.vote?.cardValue)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

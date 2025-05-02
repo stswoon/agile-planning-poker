@@ -45,8 +45,7 @@ const BoxAnimationUp: FC<{ animationMode: "up" | "down"; children: ReactNode }> 
 );
 
 const CardTable = () => {
-    const users = useRoomStore((state) => state.room.users);
-    const votes = useRoomStore((state) => state.room.votes);
+    const usersAndVotes = useRoomStore((state) => state.room.usersAndVotes);
     const showCards = useRoomStore((state) => state.room.showCards);
 
     const { usersUp, usersDown } = useMemo(() => {
@@ -54,8 +53,8 @@ const CardTable = () => {
             usersUp: [],
             usersDown: [],
         };
-        Object.values(users).forEach((user, index) => {
-            const userOnTable = <UserOnTable key={index} name={user.name} order={index} />;
+        usersAndVotes.forEach((userAndVote, index) => {
+            const userOnTable = <UserOnTable key={index} name={userAndVote.user.name} order={index} />;
             if (index % 2 === 0) {
                 const box = <BoxAnimationUp animationMode="up">{userOnTable}</BoxAnimationUp>;
                 result.usersUp.push(box);
@@ -65,23 +64,28 @@ const CardTable = () => {
             }
         });
         return result;
-    }, [users]);
+    }, [usersAndVotes]);
 
     const { votesUp, votesDown } = useMemo(() => {
         const result: { votesUp: ReactElement[]; votesDown: ReactElement[] } = {
             votesUp: [],
             votesDown: [],
         };
-        Object.values(votes).forEach((vote, index) => {
-            const cardOnTable = (
-                <PokerCard
-                    key={index}
-                    value={vote.cardValue ?? 0}
-                    rotateAngle={vote.rotateAngle}
-                    nonVisible={vote.cardValue === undefined}
-                    cardBack={!showCards}
-                />
-            );
+        usersAndVotes.forEach((userAndVote, index) => {
+            let cardOnTable;
+            if (userAndVote.vote) {
+                cardOnTable = (
+                    <PokerCard
+                        key={index}
+                        value={userAndVote.vote.cardValue ?? 0}
+                        rotateAngle={userAndVote.vote.rotateAngle}
+                        nonVisible={userAndVote.vote.cardValue === undefined}
+                        cardBack={!showCards}
+                    />
+                );
+            } else {
+                cardOnTable = <Box></Box>;
+            }
             if (index % 2 === 0) {
                 const box = <BoxAnimationUp animationMode="up">{cardOnTable}</BoxAnimationUp>;
                 result.votesUp.push(box);
@@ -91,7 +95,7 @@ const CardTable = () => {
             }
         });
         return result;
-    }, [showCards, votes]);
+    }, [showCards, usersAndVotes]);
 
     return (
         <Stack className="taCardTable">

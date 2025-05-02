@@ -1,15 +1,14 @@
-import { RoomId, UserId, JsMap, UserAction } from "common";
-import { WS } from "../utils/utils";
-import { startCleanupOldRooms } from "../utils/cleanupOldRooms";
-import { roomUserWsMappingService } from "./roomUserWsMapping.service";
-import { roomRepository } from "../repositories/room.repository";
+import { RoomId, UserId, JsMap, DtoRoom, Room, UserAndVote } from "common";
+import { startCleanupOldRooms } from "./CleanupOldRooms.service";
+import { roomUserWsMappingService } from "./RoomUserWsMapping.service";
+import { roomRepository } from "../repositories/Room.repository";
+import { UserActionStrategy } from "../models/UserActionStrategy.model";
+import { REMOVE_USER_AFTER_INACTIVE_TIMEOUT } from "../constants/constants";
+import { WS } from "../models/Ws.model";
 
 startCleanupOldRooms();
 
-const LAZY_REMOVE_TIMEOUT = 10 * 1000; //10sec;
 const userLateRemoveTimers: JsMap<UserId, NodeJS.Timeout> = {};
-
-export type UserActionStrategy = (roomId: RoomId, userId: UserId, userAction: UserAction<any>) => void;
 
 export function abstractCreateOrJoinRoom(
     ws: WS,
@@ -90,7 +89,7 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
                     console.error("Failed read message from client");
                     console.error(e);
                 }
-            }, LAZY_REMOVE_TIMEOUT);
+            }, REMOVE_USER_AFTER_INACTIVE_TIMEOUT);
         } catch (e) {
             console.error("Failed read message from client");
             console.error(e);
@@ -102,12 +101,27 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
     });
 }
 
-const broadcastRoom = (roomId: RoomId): void => {
+function broadcastRoom(roomId: RoomId): void {
     const userWsMap = roomUserWsMappingService.getUsersByRoom(roomId);
     console.log(`Broadcast room ${roomId} to usersId: [${Object.keys(userWsMap).join(", ")}]`);
     const room = roomRepository.getRoom(roomId);
-    Object.values(userWsMap).forEach((ws: WS) => ws.send(JSON.stringify(room)));
-};
+    const dtoRoom: DtoRoom = convertRoomToDto(room);
+    Object.values(userWsMap).forEach((ws: WS) => ws.send(JSON.stringify(dtoRoom)));
+}
+
+function convertRoomToDto(room: Room): DtoRoom {
+    const userAndVotes: UserAndVote[] = Object.values(room.users).map((user) => {
+        return {
+            user,
+            vote: room.votes?.[user.id],
+        };
+    });
+    return {
+        id: room.id,
+        showCards: room.showCards,
+        usersAndVotes: userAndVotes,
+    };
+}
 
 // const isEmptyRoom = (roomId: RoomId): boolean => {
 //     const room = roomRepository.getRoom(roomId);

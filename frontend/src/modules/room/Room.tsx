@@ -8,7 +8,7 @@ import { RoomExtended, useRoomStore } from "../../stores/room.store.ts";
 import CardDeck from "./CardDeck.tsx";
 import ScoreBoard from "./ScoreBoard.tsx";
 import CardTable from "./card-table/CardTable.tsx";
-import { ClearCardsUserAction, FlipCardUserAction, VoteUserAction } from "common";
+import { ClearCardsUserAction, FlipCardUserAction, UserActionType, VoteUserAction } from "common";
 
 const Room = () => {
     const navigate = useNavigate();
@@ -34,23 +34,23 @@ const Room = () => {
         (cardValue: number | string) => {
             console.log("handleThrowCard:" + cardValue);
             const action: VoteUserAction = {
-                type: "vote",
-                payload: { userId, cardValue },
+                type: UserActionType.vote,
+                payload: { cardValue },
             };
             sendMessage(JSON.stringify(action));
         },
-        [sendMessage, userId],
+        [sendMessage],
     );
 
     const handleFlipCards = useCallback(() => {
         console.log("handleFlipCards");
-        const action: FlipCardUserAction = { type: "flipCards" };
+        const action: FlipCardUserAction = { type: UserActionType.flipCards };
         sendMessage(JSON.stringify(action));
     }, [sendMessage]);
 
     const handleClearCards = useCallback(() => {
         console.log("handleClearCards");
-        const action: ClearCardsUserAction = { type: "clearCards" };
+        const action: ClearCardsUserAction = { type: UserActionType.clearCards };
         sendMessage(JSON.stringify(action));
     }, [sendMessage]);
 

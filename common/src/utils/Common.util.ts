@@ -1,10 +1,8 @@
-export type WS = import("ws");
-
 export const utils = {
     now: (): number => {
         const d = new Date();
         return d.getTime();
     },
 
-    deepCopy: <T>(o: T): T => JSON.parse(JSON.stringify(o)),
+    deepCopy: <T>(o: T): T => JSON.parse(JSON.stringify(o))
 };

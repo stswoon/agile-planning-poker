@@ -1,80 +1,79 @@
-import { Room } from "common";
+import { DtoRoom } from "common";
 
-export const stubRoom: Room = {
-    createdDate: new Date().getTime(),
+export const stubRoom: DtoRoom = {
     id: "test-room",
     showCards: false,
-    users: {
-        "1": {
-            name: "Shiny Dexter Jettster3",
-            id: "1",
-            active: true,
+    usersAndVotes: [
+        {
+            user: {
+                name: "Shiny Dexter Jettster3",
+                id: "1",
+                active: true,
+            },
+            vote: {
+                rotateAngle: 10,
+                cardValue: "?",
+            },
         },
-        "2": {
-            name: "Ivan Ivanov",
-            id: "2",
-            active: false,
+        {
+            user: {
+                name: "Ivan Ivanov",
+                id: "2",
+                active: false,
+            },
+            vote: {
+                rotateAngle: 0,
+                cardValue: 0,
+            },
         },
-        "3": {
-            name: "Petr Petrovich",
-            id: "3",
-            active: false,
+        {
+            user: {
+                name: "Petr Petrovich",
+                id: "3",
+                active: false,
+            },
+            vote: {
+                rotateAngle: -10,
+                cardValue: 5,
+            },
         },
-        "4": {
-            name: "NoName",
-            id: "4",
-            active: true,
+        {
+            user: {
+                name: "NoName",
+                id: "4",
+                active: true,
+            },
+            vote: undefined,
         },
-        "5": {
-            name: "Very looooooooong nnnnnaaaaaaaaaaaaaaaaaaaaammmmmeeeeeeeee name name name",
-            id: "5",
-            active: true,
+        {
+            user: {
+                name: "Very looooooooong nnnnnaaaaaaaaaaaaaaaaaaaaammmmmeeeeeeeee name name name",
+                id: "5",
+                active: true,
+            },
         },
-    },
-    votes: {
-        "1": {
-            userId: "1",
-            rotateAngle: 10,
-            cardValue: "?",
-        },
-        "2": {
-            userId: "2",
-            rotateAngle: 0,
-            cardValue: 0,
-        },
-        "3": {
-            userId: "3",
-            rotateAngle: -10,
-            cardValue: 5,
-        },
-        "4": {
-            userId: "1",
-            rotateAngle: 10,
-            cardValue: undefined,
-        },
-    },
+    ],
 };
 
-export const stubBigRoom: Room = {
-    createdDate: new Date().getTime(),
+export const stubBigRoom: DtoRoom = {
     id: "test-big-big-big-room",
     showCards: false,
-    users: Object.keys(stubRoom.users).reduce<Room["users"]>((acc, userId) => {
-        let newUserId = userId + "q";
-        acc[newUserId] = { ...stubRoom.users[userId], id: newUserId };
-        newUserId = userId + "w";
-        acc[newUserId] = { ...stubRoom.users[userId], id: newUserId };
-        newUserId = userId + "e";
-        acc[newUserId] = { ...stubRoom.users[userId], id: newUserId };
+    usersAndVotes: stubRoom.usersAndVotes.reduce<DtoRoom["usersAndVotes"]>((acc, userAndVote) => {
+        let newUserId = userAndVote.user.id + "qq_";
+        acc.push({
+            user: { ...userAndVote.user, id: newUserId },
+            vote: userAndVote.vote ? { ...userAndVote.vote } : undefined,
+        });
+        newUserId = userAndVote.user.id + "ww_";
+        acc.push({
+            user: { ...userAndVote.user, id: newUserId },
+            vote: userAndVote.vote ? { ...userAndVote.vote } : undefined,
+        });
+        newUserId = userAndVote.user.id + "ee_";
+        acc.push({
+            user: { ...userAndVote.user, id: newUserId },
+            vote: userAndVote.vote ? { ...userAndVote.vote } : undefined,
+        });
         return acc;
-    }, {}),
-    votes: Object.keys(stubRoom.votes).reduce<Room["votes"]>((acc, userId) => {
-        let newUserId = userId + "q";
-        acc[newUserId] = { ...stubRoom.votes[userId], userId: newUserId };
-        newUserId = userId + "w";
-        acc[newUserId] = { ...stubRoom.votes[userId], userId: newUserId };
-        newUserId = userId + "e";
-        acc[newUserId] = { ...stubRoom.votes[userId], userId: newUserId };
-        return acc;
-    }, {}),
+    }, []),
 };

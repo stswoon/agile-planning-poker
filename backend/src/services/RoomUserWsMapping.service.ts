@@ -1,5 +1,5 @@
 import { JsMap, RoomId, UserId } from "common";
-import { WS } from "../utils/utils";
+import { WS } from "../models/Ws.model";
 
 const roomUserWsMap: JsMap<RoomId, JsMap<UserId, WS>> = {};
 
