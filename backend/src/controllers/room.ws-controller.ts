@@ -15,7 +15,8 @@ const wsRoomRouter = (ws: WS, req: Request, next: NextFunction): void => {
     try {
         createOrJoinRoom(ws, roomId, userId, userName);
     } catch (e) {
-        next(e);
+        // https://scoutapm.com/blog/express-error-handling
+        next(e); //passing to default middleware error handler
     }
 };
 

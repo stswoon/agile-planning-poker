@@ -7,6 +7,7 @@ import { errorHandlerMiddleware } from "./utils/errorHandler.middleware";
 import { setStaticFilesCacheHeaders } from "./utils/staticFilesCacheHeaders";
 import { wsRoomRouter } from "./controllers/room.ws-controller";
 import { healthRouter } from "./controllers/health.controller";
+import path from "node:path";
 
 const app = express();
 const appWs = expressWs(app);
@@ -20,8 +21,13 @@ app.use(
         setHeaders: setStaticFilesCacheHeaders,
     }),
 );
-app.get("/room", (_, res) => {
-    res.sendFile(__dirname + "/public" + "/index.html");
+//catch all routes for SPA (route /* cause error)
+app.get("/room/:roomId", (_, res, next) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"), (err) => {
+        if (err) {
+            next(err);
+        }
+    });
 });
 app.use("/health", healthRouter);
 

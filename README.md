@@ -9,3 +9,9 @@ https://poker-planning.stswoon.ru/
 //TODO: image, ad, link, link to all programs
 
 //TODO: refactoring
+
+//TODO: vote and users slip in one
+
+//TODO: js chank warning
+
+//TODO: TS got tot http://localhost:3000/room/red-booby2 or 3
