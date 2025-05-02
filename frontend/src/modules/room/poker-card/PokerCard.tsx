@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { Box, Typography } from "@mui/material";
-import classNames from "classNames";
+import cn from "classnames";
 import cardFrontImg from "./card-front.webp";
 import cardBackImg from "./card-back.webp";
 
@@ -43,7 +43,7 @@ const PokerCardWithAnimation: FC<PokerCardProps> = memo((props) => {
     return (
         <Box className={"poker-card__perspective"} sx={{ perspective: "1000px", ...cardSize }}>
             <Box
-                className={classNames("poker-card__card", { _flipped: !!props.cardBack })}
+                className={cn("poker-card__card", { _flipped: !!props.cardBack })}
                 sx={{
                     position: "relative",
                     width: "100%",
