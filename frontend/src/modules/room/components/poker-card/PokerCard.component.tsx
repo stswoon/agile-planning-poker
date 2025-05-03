@@ -14,6 +14,10 @@ export interface PokerCardProps {
     rotateAngle?: number;
 }
 
+const PokerCardEmpty: FC = memo(() => {
+    return <Box className="taPokerCardEmpty" sx={{ ...cardSizes }} />;
+});
+
 const PokerCard: FC<PokerCardProps> = memo(({ value, side, rotateAngle }) => {
     const displayValue = value === 0.5 ? "½" : value + "";
     return (
@@ -107,4 +111,4 @@ const PokerCardBase: FC<PokerCardInnerProps> = memo(({ text, side }) => {
     );
 });
 
-export { PokerCard as PokerCard };
+export { PokerCard, PokerCardEmpty };

@@ -56,7 +56,7 @@ export const testRoom: DtoRoom = {
 };
 
 export const testBigRoom: DtoRoom = {
-    id: "test-big-big-big-room",
+    id: "test-big-room",
     showCards: false,
     usersAndVotes: testRoom.usersAndVotes.reduce<DtoRoom["usersAndVotes"]>((acc, userAndVote) => {
         acc.push(getNewUserAndVote(userAndVote, "qqq_"));

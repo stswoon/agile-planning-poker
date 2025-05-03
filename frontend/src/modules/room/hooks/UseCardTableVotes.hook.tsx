@@ -1,8 +1,7 @@
 import { UserAndVote } from "shared";
 import { ReactNode, useMemo } from "react";
 import { BoxAnimationUpDown } from "../components/card-table/BoxAnimationUpDown.component.tsx";
-import { PokerCard } from "../components/poker-card/PokerCard.component.tsx";
-import { Box } from "@mui/material";
+import { PokerCard, PokerCardEmpty } from "../components/poker-card/PokerCard.component.tsx";
 
 export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boolean) {
     const { votesUp, votesDown } = useMemo(() => {
@@ -20,23 +19,13 @@ export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boole
                 />
             );
 
-            if (index % 2 === 0) {
-                if (cardOnTable) {
-                    const box = <BoxAnimationUpDown animationMode="up">{cardOnTable}</BoxAnimationUpDown>;
-                    result.votesUp.push(box);
-                } else {
-                    const box = <Box className="taEmptyVote" />;
-                    result.votesUp.push(box);
-                }
-            } else {
-                if (cardOnTable) {
-                    const box = <BoxAnimationUpDown animationMode="down">{cardOnTable}</BoxAnimationUpDown>;
-                    result.votesDown.push(box);
-                } else {
-                    const box = <Box className="taEmptyVote" />;
-                    result.votesDown.push(box);
-                }
-            }
+            const animationMode = index % 2 === 0 ? "up" : "down";
+            const box = cardOnTable ? (
+                <BoxAnimationUpDown animationMode={animationMode}>{cardOnTable}</BoxAnimationUpDown>
+            ) : (
+                <PokerCardEmpty />
+            );
+            (index % 2 === 0 ? result.votesUp : result.votesDown).push(box);
         });
         return result;
     }, [showCards, usersAndVotes]);
