@@ -1,4 +1,4 @@
-import { RoomId, UserId, UserAction, UserActionType, isVoteUserAction } from "common";
+import { RoomId, UserId, UserAction, UserActionType, isVoteUserAction } from "shared";
 import { abstractCreateOrJoinRoom } from "./AbstractRoom.service";
 import { roomRepository } from "../repositories/Room.repository";
 import { WS } from "../models/Ws.model";

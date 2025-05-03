@@ -1,20 +1,22 @@
 import { ThemeProvider } from "@mui/material";
-import { muiTheme } from "./constants/muiTheme.constants.ts";
+import { muiTheme } from "./modules/common/constants/MuiTheme.constants.ts";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import { memo } from "react";
-import Home from "./modules/home/Home.tsx";
-import Room from "./modules/room/Room.tsx";
+import { FC, memo } from "react";
+import { Home } from "./modules/home/Home.component.tsx";
+import { Room } from "./modules/room/components/Room.component.tsx";
 
-const App = () => (
-    <ThemeProvider theme={muiTheme}>
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<Home />} />
-                <Route path="/room/:roomId" element={<Room />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-        </BrowserRouter>
-    </ThemeProvider>
-);
+const App: FC = memo(() => (
+    <div className="taApp">
+        <ThemeProvider theme={muiTheme}>
+            <BrowserRouter>
+                <Routes>
+                    <Route index element={<Home />} />
+                    <Route path="/room/:roomId" element={<Room />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    </div>
+));
 
-export default memo(App);
+export { App };

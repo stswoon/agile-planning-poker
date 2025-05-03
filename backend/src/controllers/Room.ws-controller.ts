@@ -1,7 +1,7 @@
 import { NextFunction, Request } from "express";
 import { WS } from "../models/Ws.model";
 import { createOrJoinRoom } from "../services/Room.service";
-import { RoomId, UserId } from "common";
+import { RoomId, UserId } from "shared";
 
 interface WsRoomRequestQuery {
     roomId: RoomId;

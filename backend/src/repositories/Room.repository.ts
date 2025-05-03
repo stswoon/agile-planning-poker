@@ -1,4 +1,4 @@
-import { Room, RoomId, JsMap, User, UserId, Vote, utils } from "common";
+import { Room, RoomId, JsMap, User, UserId, Vote, utils } from "shared";
 
 const ROOM_DB: JsMap<RoomId, Room> = {};
 

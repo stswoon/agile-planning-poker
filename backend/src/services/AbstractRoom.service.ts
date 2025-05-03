@@ -1,4 +1,4 @@
-import { RoomId, UserId, JsMap, DtoRoom, Room, UserAndVote } from "common";
+import { RoomId, UserId, JsMap, DtoRoom, Room, UserAndVote } from "shared";
 import { startCleanupOldRooms } from "./CleanupOldRooms.service";
 import { roomUserWsMappingService } from "./RoomUserWsMapping.service";
 import { roomRepository } from "../repositories/Room.repository";
@@ -51,8 +51,8 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
             } else {
                 const userAction = JSON.parse(msg);
                 userActionCallback(roomId, userId, userAction);
+                broadcastRoom(roomId);
             }
-            broadcastRoom(roomId);
         } catch (e) {
             console.error("Failed read message from client");
             console.error(e);
@@ -106,6 +106,9 @@ function broadcastRoom(roomId: RoomId): void {
     console.log(`Broadcast room ${roomId} to usersId: [${Object.keys(userWsMap).join(", ")}]`);
     const room = roomRepository.getRoom(roomId);
     const dtoRoom: DtoRoom = convertRoomToDto(room);
+    if (dtoRoom.showCards) {
+        console.debug("showCards");
+    }
     Object.values(userWsMap).forEach((ws: WS) => ws.send(JSON.stringify(dtoRoom)));
 }
 

@@ -1,6 +1,6 @@
 {
     "name": "poker-planning-2",
-    "version": "0.0.38",
+    "version": "0.0.39",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
         "dev:fe": "cd frontend && npm run dev",
@@ -22,7 +22,7 @@
         "minimist": "^1.2.8"
     },
     "workspaces": [
-        "common"
+        "shared"
     ],
     "simple-git-hooks": {
         "pre-commit": "npm run lint:staged && npm run patch-version"
