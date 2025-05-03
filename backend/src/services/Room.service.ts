@@ -21,17 +21,16 @@ function executeUserAction(roomId: RoomId, userId: UserId, userAction: UserActio
         const vote = userAction.payload;
         const rotateAngle = (Math.round(Math.random() * 10) - 5) * 2; //degrees
         roomRepository.vote(roomId, userId, { cardValue: vote.cardValue, rotateAngle });
-        openCardIfAllVotes(roomId);
+        if (isAllVotes(roomId)) {
+            console.log(`All users made vote in room (${roomId}) so open cards`);
+            roomRepository.setShowCards(roomId, true);
+        }
     } else {
         console.error(`Unknown user type cation=${type}, ${userName} (${userId}) in room ${roomId}`);
     }
 }
 
-const openCardIfAllVotes = (roomId: RoomId) => {
+const isAllVotes = (roomId: RoomId) => {
     const room = roomRepository.getRoom(roomId);
-    const isAllVotes: boolean = Object.values(room.votes).reduce((acc, vote) => acc && vote.cardValue != null, true);
-    if (isAllVotes) {
-        console.info(`All users made vote in room (${roomId}) so open cards`);
-        roomRepository.setShowCards(roomId, true);
-    }
+    return Object.values(room.users).length === Object.values(room.votes).length;
 };
