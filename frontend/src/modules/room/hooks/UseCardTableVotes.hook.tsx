@@ -10,18 +10,16 @@ export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boole
             votesDown: [],
         };
         usersAndVotes.forEach((userAndVote, index) => {
-            const cardOnTable = userAndVote.vote && (
-                <PokerCard
-                    key={index}
-                    value={userAndVote.vote.cardValue ?? 0}
-                    rotateAngle={userAndVote.vote.rotateAngle}
-                    side={showCards ? "front" : "back"}
-                />
-            );
-
             const animationMode = index % 2 === 0 ? "up" : "down";
-            const box = cardOnTable ? (
-                <BoxAnimationUpDown animationMode={animationMode}>{cardOnTable}</BoxAnimationUpDown>
+            const box = userAndVote.vote ? (
+                <BoxAnimationUpDown animationMode={animationMode}>
+                    <PokerCard
+                        key={index}
+                        value={userAndVote.vote.cardValue ?? 0}
+                        rotateAngle={userAndVote.vote.rotateAngle}
+                        side={showCards ? "front" : "back"}
+                    />
+                </BoxAnimationUpDown>
             ) : (
                 <PokerCardEmpty />
             );
