@@ -22,7 +22,7 @@ const PokerCard: FC<PokerCardProps> = memo(({ value, side, rotateAngle }) => {
     const displayValue = value === 0.5 ? "½" : value + "";
     return (
         <Box className="taPokerCard">
-            <PokerCardWithAngle text={displayValue} side={side} rotateAngle={rotateAngle} />
+            <PokerCardWithAngle text={displayValue} side={side} rotateAngle={rotateAngle ?? 0} />
         </Box>
     );
 });
@@ -30,10 +30,9 @@ const PokerCard: FC<PokerCardProps> = memo(({ value, side, rotateAngle }) => {
 interface PokerCardInnerProps {
     text: string;
     side: "front" | "back";
-    rotateAngle?: number;
 }
 
-const PokerCardWithAngle: FC<PokerCardInnerProps> = memo((props) => {
+const PokerCardWithAngle: FC<PokerCardInnerProps & { rotateAngle: number }> = memo((props) => {
     return (
         <Box
             className="taPokerCardWithAngle"

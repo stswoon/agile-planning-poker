@@ -15,7 +15,7 @@ export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boole
                 <BoxAnimationUpDown animationMode={animationMode}>
                     <PokerCard
                         key={index}
-                        value={userAndVote.vote.cardValue ?? 0}
+                        value={userAndVote.vote.cardValue}
                         rotateAngle={userAndVote.vote.rotateAngle}
                         side={showCards ? "front" : "back"}
                     />
