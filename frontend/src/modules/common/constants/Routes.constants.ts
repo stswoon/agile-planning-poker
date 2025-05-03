@@ -1,4 +1,4 @@
-import { RoomId, UserId } from "shared";
+import { RoomId, UserId } from "@stswoon/shared";
 
 export const routes = {
     navigation: {

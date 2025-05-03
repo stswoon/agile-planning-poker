@@ -1,4 +1,4 @@
-import { UserAndVote } from "shared";
+import { UserAndVote } from "@stswoon/shared";
 import { ReactNode, useMemo } from "react";
 import { BoxAnimationUpDown } from "../components/card-table/BoxAnimationUpDown.component.tsx";
 import { PokerCard, PokerCardEmpty } from "../components/poker-card/PokerCard.component.tsx";

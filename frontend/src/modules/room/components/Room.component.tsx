@@ -1,6 +1,6 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { ClearCardsUserAction, FlipCardUserAction, UserActionType, VoteUserAction } from "shared";
+import { ClearCardsUserAction, FlipCardUserAction, UserActionType, VoteUserAction } from "@stswoon/shared";
 import { useUserStore } from "../../home/User.store.ts";
 import { useWebSocket } from "../../common/hooks/UseWebSocket.hook.ts";
 import { routes } from "../../common/constants/Routes.constants.ts";

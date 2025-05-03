@@ -1,4 +1,4 @@
-import { RoomId, UserId, JsMap, DtoRoom, Room, UserAndVote } from "shared";
+import { RoomId, UserId, JsMap, DtoRoom, Room, UserAndVote } from "@stswoon/shared";
 import { startCleanupOldRooms } from "./CleanupOldRooms.service";
 import { roomUserWsMappingService } from "./RoomUserWsMapping.service";
 import { roomRepository } from "../repositories/Room.repository";

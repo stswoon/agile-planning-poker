@@ -1,4 +1,4 @@
-import { UserId } from "shared";
+import { UserId } from "@stswoon/shared";
 
 export interface UserStore {
     localUser: {

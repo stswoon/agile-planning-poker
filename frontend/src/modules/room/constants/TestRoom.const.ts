@@ -1,4 +1,4 @@
-import { DtoRoom, UserAndVote } from "shared";
+import { DtoRoom, UserAndVote } from "@stswoon/shared";
 
 export const testRoom: DtoRoom = {
     id: "test-room",

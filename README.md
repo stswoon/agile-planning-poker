@@ -5,6 +5,8 @@ https://poker-planning.stswoon.ru/
 * How to create vite - https://vite.dev/guide/#scaffolding-your-first-vite-project
 * How to create node.js+express+typescript - https://blog.logrocket.com/express-typescript-node/
 
+https://onderonur.github.io/blog/creating-a-typescript-library-with-vite/
+
 
 //TODO: image, ad, link, link to all programs
 

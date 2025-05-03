@@ -1,4 +1,4 @@
-import { JsMap, RoomId, UserId } from "shared";
+import { JsMap, RoomId, UserId } from "@stswoon/shared";
 import { WS } from "../models/Ws.model";
 
 const roomUserWsMap: JsMap<RoomId, JsMap<UserId, WS>> = {};

@@ -1,4 +1,4 @@
-import { UserAndVote, UserId } from "shared";
+import { UserAndVote, UserId } from "@stswoon/shared";
 import { FC, memo, useCallback, useMemo } from "react";
 import { Box, Stack, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";

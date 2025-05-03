@@ -1,6 +1,29 @@
 {
-    "name": "shared",
+    "name": "@stswoon/shared",
     "version": "0.0.0",
-    "license": "ISC",
-    "main": "index.ts"
+    "type": "module",
+    "main": "./dist/my-lib.umd.cjs",
+    "module": "./dist/my-lib.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/my-lib.js",
+            "require": "./dist/my-lib.umd.cjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "prod": "npm run build",
+        "-----": "echo 0",
+        "dev": "vite",
+        "build": "tsc && vite build"
+    },
+    "devDependencies": {
+        "typescript": "~5.8.3",
+        "vite": "^6.3.2",
+        "vite-plugin-dts": "^4.5.3"
+    }
 }

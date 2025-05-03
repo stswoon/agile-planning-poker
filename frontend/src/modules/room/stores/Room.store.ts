@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { DtoRoom } from "shared";
+import { DtoRoom } from "@stswoon/shared";
 import { devtools } from "zustand/middleware";
 import { RoomStore } from "../models/RoomStore.model.ts";
 import { RoomExtended } from "../models/RoomWithLoading.model.ts";

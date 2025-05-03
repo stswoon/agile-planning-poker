@@ -1,6 +1,6 @@
 import { uniqueNamesGenerator, adjectives, colors, animals, starWars } from "unique-names-generator";
 import shortUuid from "short-uuid";
-import { utils } from "shared";
+import { utils } from "@stswoon/shared";
 
 export const getRandomRoomId = (): string =>
     uniqueNamesGenerator({

@@ -1,4 +1,4 @@
-import { RoomId, utils } from "shared";
+import { RoomId, utils } from "@stswoon/shared";
 import { roomRepository } from "../repositories/Room.repository";
 import { roomUserWsMappingService } from "./RoomUserWsMapping.service";
 import { ROOM_CLEANUP_PERIOD, ROOM_TTL } from "../constants/constants";
