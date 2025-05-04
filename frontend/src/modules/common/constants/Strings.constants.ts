@@ -9,7 +9,7 @@ export const strings = {
     donate: "Donate",
     flipCards: "Flip Cards",
     clearCards: "Clear Cards",
-    noCard: "No Card",
+    noCard: "Empty",
     hiddenCardValue: "???",
     average: "Average: ",
     roomName: "Room: ",

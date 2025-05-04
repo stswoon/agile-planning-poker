@@ -44,6 +44,7 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
                     key={value}
                     sx={{
                         height: "50%",
+                        maxHeight: "150px",
                         width: "calc(12.5% - 4px)",
                         maxWidth: "120px",
                         margin: "2px",

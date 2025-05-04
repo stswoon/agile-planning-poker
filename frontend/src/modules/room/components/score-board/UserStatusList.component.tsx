@@ -1,6 +1,6 @@
 import { UserAndVote, UserId } from "@stswoon/shared";
 import { FC, memo, useCallback, useMemo } from "react";
-import { Box, Stack, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import { BoxBlinkAnimation } from "../../../common/components/BoxBlinkAnimation.component.tsx";
@@ -46,30 +46,36 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
                 {strings.average}
                 {displayAverage}
             </Typography>
-            <Table size="small">
-                <TableBody>
-                    {usersAndVotes.map((userAndVote) => (
-                        <TableRow key={userAndVote.user.id}>
-                            <TableCell>
-                                <Stack direction="row" gap={0.5}>
-                                    {!userAndVote.user.active && (
-                                        <BoxBlinkAnimation>
-                                            <NoAccountsIcon color="error" fontSize="small" />
-                                        </BoxBlinkAnimation>
-                                    )}
-                                    <Typography
-                                        variant="body2"
-                                        fontWeight={userAndVote.user.id === currentUserId ? "bold" : undefined}
-                                    >
-                                        {userAndVote.user.name}
-                                    </Typography>
-                                </Stack>
-                            </TableCell>
-                            <TableCell align="right">{displayCardValue(userAndVote.vote?.cardValue)}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+            <TableContainer sx={{ maxHeight: 440 }}>
+                <Table size="small">
+                    <TableBody>
+                        {usersAndVotes.map((userAndVote) => (
+                            <TableRow key={userAndVote.user.id}>
+                                <TableCell>
+                                    <Stack direction="row" gap={0.5} alignContent="center" justifyItems="center">
+                                        {!userAndVote.user.active && (
+                                            <BoxBlinkAnimation>
+                                                <NoAccountsIcon color="error" fontSize="small" />
+                                            </BoxBlinkAnimation>
+                                        )}
+                                        <Typography
+                                            variant="body2"
+                                            fontWeight={userAndVote.user.id === currentUserId ? "bold" : undefined}
+                                            noWrap
+                                            width="150px"
+                                        >
+                                            {userAndVote.user.name}
+                                        </Typography>
+                                    </Stack>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography noWrap variant="body2">{displayCardValue(userAndVote.vote?.cardValue)}</Typography>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Box>
     );
 });
