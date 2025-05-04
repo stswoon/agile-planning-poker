@@ -5,12 +5,12 @@ import { useUserStore } from "../../home/User.store.ts";
 import { useWebSocket } from "../../common/hooks/UseWebSocket.hook.ts";
 import { routes } from "../../common/constants/Routes.constants.ts";
 import { useRoomStore } from "../stores/Room.store.ts";
-import { testBigRoom, testRoom } from "../constants/TestRoom.const.ts";
 import { RoomExtended } from "../models/RoomWithLoading.model.ts";
 import { RoomLayout } from "./RoomLayout.component.tsx";
 import { CardTable } from "./card-table/CardTable.component.tsx";
 import { CardDeck } from "./card-deck/CardDeck.component.tsx";
 import { ScoreBoard } from "./score-board/ScoreBoard.component.tsx";
+import { testRooms } from "../constants/TestRoom.const.ts";
 
 const Room: FC = memo(() => {
     const navigate = useNavigate();
@@ -26,16 +26,11 @@ const Room: FC = memo(() => {
 
     useEffect(() => {
         if (__DEV_MODE__) {
-            if (roomId === testRoom.id) {
+            const fountTestRoom = testRooms.find((room) => room.id === roomId);
+            if (fountTestRoom) {
+                console.warn(`Used test room with id = ${fountTestRoom.id}`);
                 setRoom({
-                    ...testRoom,
-                    isError: false,
-                    isLoading: false,
-                });
-                return;
-            } else if (roomId === testBigRoom.id) {
-                setRoom({
-                    ...testBigRoom,
+                    ...fountTestRoom,
                     isError: false,
                     isLoading: false,
                 });

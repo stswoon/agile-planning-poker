@@ -37,16 +37,69 @@ const Home: FC = memo(() => {
     return (
         <Box className="taHome" sx={{ height: "100vh" }}>
             <CenterVertical>
-                <Stack direction="column" gap={2}>
-                    <TextField
-                        label={strings.enterName}
-                        value={userName}
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
-                    />
+                <Stack direction="column" gap={10}>
+                    <CenterVertical>
+                        <Typography width={800} textAlign="justify" variant={"subtitle1"}>
+                            {strings.description.part1}
+                            <b>{strings.description.part2}</b>
+                            {strings.description.part3}
+                        </Typography>
+                    </CenterVertical>
 
-                    <Button variant="contained" size="large" onClick={redirectRoomId ? backToRoom : createRoom}>
-                        <Typography variant="h3">{redirectRoomId ? strings.backToRoom : strings.createRoom}</Typography>
-                    </Button>
+                    <CenterVertical>
+                        <Stack direction="column" gap={2} width={400}>
+                            <TextField
+                                label={strings.enterName}
+                                value={userName}
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
+                            />
+
+                            <Button
+                                variant="contained"
+                                size="large"
+                                onClick={redirectRoomId ? backToRoom : createRoom}
+                                sx={{
+                                    animation: "wiggle 20s infinite",
+                                    animationDelay: "1s",
+                                    "@keyframes wiggle": {
+                                        "0%": { transform: "rotate(0deg)" },
+                                        "0.5%": { transform: "rotate(-2deg)" },
+                                        "1%": { transform: "rotate(2deg)" },
+                                        "1.5%": { transform: "rotate(-2deg)" },
+                                        "2%": { transform: "rotate(2deg)" },
+                                        "2.5%": { transform: "rotate(-2deg)" },
+                                        "3%": { transform: "rotate(0deg)" },
+                                        "100%": { transform: "rotate(0deg)" },
+                                    },
+                                }}
+                            >
+                                <Typography variant="h3">
+                                    {redirectRoomId ? strings.backToRoom : strings.createRoom}
+                                </Typography>
+                            </Button>
+                        </Stack>
+                    </CenterVertical>
+
+                    <CenterVertical>
+                        <Box
+                            sx={{
+                                border: "1px dashed black",
+                                borderRadius: "30px",
+                                padding: "10px",
+                                width: "800px",
+                            }}
+                        >
+                            <img
+                                style={{
+                                    objectFit: "cover",
+                                    borderRadius: "30px",
+                                }}
+                                src={"/images/demo-img.png"}
+                                loading="lazy"
+                                alt={"Demo image for this poker planing"}
+                            />
+                        </Box>
+                    </CenterVertical>
                 </Stack>
             </CenterVertical>
         </Box>

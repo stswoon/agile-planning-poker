@@ -14,4 +14,9 @@ export const strings = {
     average: "Average: ",
     roomName: "Room: ",
     you: "You: ",
+    description: {
+        part1: "This website is a convenient tool for running ",
+        part2: "Planning Poker",
+        part3: ", a popular technique used in Agile development for collaboratively estimating user stories. Team members select their estimates anonymously, and the results are automatically revealed for discussion. It's ideal for remote teams and effective sprint planning.",
+    },
 };
