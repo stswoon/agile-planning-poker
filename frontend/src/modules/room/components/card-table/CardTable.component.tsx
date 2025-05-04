@@ -19,11 +19,11 @@ const CardTable: FC = memo(() => {
 
     return (
         <Stack className="taCardTable" height={"100%"}>
-            <Stack height={"20%"} className="taBenchUp" direction="row" justifyContent="space-around" alignItems="center">
+            <Stack height="20%" className="taBenchUp" direction="row" justifyContent="space-around" alignItems="center">
                 {usersUp}
             </Stack>
 
-            <Stack height={"60%"} direction="row" className="taCardTableInner" position="relative">
+            <Stack height="60%" direction="row" className="taCardTableInner" position="relative">
                 <img
                     style={{
                         objectFit: "cover",
@@ -81,7 +81,13 @@ const CardTable: FC = memo(() => {
                 />
             </Stack>
 
-            <Stack height={"20%"} className="taBenchDown" direction="row" justifyContent="space-around" alignItems="center">
+            <Stack
+                height="20%"
+                className="taBenchDown"
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center"
+            >
                 {usersDown}
             </Stack>
         </Stack>
