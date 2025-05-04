@@ -40,6 +40,7 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
         >
             {avCards.map(({ value, side }) => (
                 <Box
+                    key={value}
                     sx={{
                         width: "calc(12.5% - 4px)",
                         maxWidth: "120px",
@@ -49,7 +50,7 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
                     }}
                     onClick={() => onThrowCard(value)}
                 >
-                    <PokerCard key={value} value={value} side={side} />
+                    <PokerCard value={value} side={side} />
                 </Box>
             ))}
         </Stack>

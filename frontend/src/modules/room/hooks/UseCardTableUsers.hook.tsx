@@ -11,13 +11,21 @@ export function useCardTableUsers(usersAndVotes: UserAndVote[]) {
         };
         usersAndVotes.forEach((userAndVote, index) => {
             const userOnTable = (
-                <UserOnTable key={index} name={userAndVote.user.name} order={index} active={userAndVote.user.active} />
+                <UserOnTable name={userAndVote.user.name} order={index} active={userAndVote.user.active} />
             );
             if (index % 2 === 0) {
-                const box = <BoxAnimationUpDown animationMode="up">{userOnTable}</BoxAnimationUpDown>;
+                const box = (
+                    <BoxAnimationUpDown key={"user_" + index} animationMode="up">
+                        {userOnTable}
+                    </BoxAnimationUpDown>
+                );
                 result.usersUp.push(box);
             } else {
-                const box = <BoxAnimationUpDown animationMode="down">{userOnTable}</BoxAnimationUpDown>;
+                const box = (
+                    <BoxAnimationUpDown key={"user_" + index} animationMode="down">
+                        {userOnTable}
+                    </BoxAnimationUpDown>
+                );
                 result.usersDown.push(box);
             }
         });

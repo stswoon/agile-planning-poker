@@ -46,6 +46,9 @@ const addUser = (roomId: RoomId, user: User): void => {
 
 const setUserActivity = (roomId: RoomId, userId: UserId, active: boolean): void => {
     const room = getRoom(roomId);
+    if (!room.users[userId]) {
+        console.error(`User ${userId} not found in room ${roomId}`);
+    }
     room.users[userId].active = active;
     _saveRoom(room);
 };

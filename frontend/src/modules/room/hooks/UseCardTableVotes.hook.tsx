@@ -12,7 +12,7 @@ export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boole
         usersAndVotes.forEach((userAndVote, index) => {
             const animationMode = index % 2 === 0 ? "up" : "down";
             const box = userAndVote.vote ? (
-                <BoxAnimationUpDown animationMode={animationMode}>
+                <BoxAnimationUpDown key={"card_" + index} animationMode={animationMode}>
                     <PokerCard
                         key={index}
                         value={userAndVote.vote.cardValue}
@@ -21,7 +21,7 @@ export function useCardTableVotes(usersAndVotes: UserAndVote[], showCards: boole
                     />
                 </BoxAnimationUpDown>
             ) : (
-                <PokerCardEmpty />
+                <PokerCardEmpty key={"card_" + index} />
             );
             (index % 2 === 0 ? result.votesUp : result.votesDown).push(box);
         });
