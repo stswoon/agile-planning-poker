@@ -18,7 +18,7 @@ const RoomLayout: FC<AppLayoutType> = memo(({ cardTable, cardDeck, scoreBoard, c
             sx={{
                 minWidth: "1000px",
                 minHeight: "700px",
-                height: "91vh", //to save on horizontal scroll
+                height: "91vh", //TODO: fix it (to save on horizontal scroll)
             }}
         >
             <Stack direction="row" sx={{ height: "100%" }}>
