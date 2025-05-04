@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Divider, Stack } from "@mui/material";
 import { FC, memo, ReactNode } from "react";
 import { CenterHorizontal } from "../../common/components/CenterHorizontal.component.tsx";
 import cl from "classnames";
@@ -18,18 +18,19 @@ const RoomLayout: FC<AppLayoutType> = memo(({ cardTable, cardDeck, scoreBoard, c
             sx={{
                 minWidth: "1000px",
                 minHeight: "700px",
-                height: "98vh", //to save on horizontal scroll
+                height: "91vh", //to save on horizontal scroll
             }}
         >
             <Stack direction="row" sx={{ height: "100%" }}>
-                <Box sx={{ width: "calc(100% - 320px)", height: "100%" }}>
-                    <Box sx={{ height: "70%" }}>
+                <Stack sx={{ width: "calc(100% - 320px)", height: "100%" }} gap={1}>
+                    <Box sx={{ height: "70%" }} paddingRight={1} paddingLeft={1}>
                         <CenterHorizontal>{cardTable}</CenterHorizontal>
                     </Box>
+                    <Divider />
                     <Box sx={{ height: "30%" }}>
                         <CenterHorizontal>{cardDeck}</CenterHorizontal>
                     </Box>
-                </Box>
+                </Stack>
                 <Box sx={{ width: "320px", height: "100%" }}>{scoreBoard}</Box>
             </Stack>
         </Box>

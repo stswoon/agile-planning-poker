@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Box, Divider, Toolbar, Drawer, Typography, Button, List, ListItem } from "@mui/material";
+import { Box, Divider, Toolbar, Drawer, Typography, Button, List, ListItem, ButtonGroup } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import { routes } from "../../../common/constants/Routes.constants.ts";
 import { useRoomStore } from "../../stores/Room.store.ts";
@@ -33,7 +33,7 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
             anchor="right"
         >
             <Toolbar>
-                <Typography>
+                <Typography variant="h6">
                     {strings.appName} {strings.appVersionPrefix}
                     {__APP_VERSION__}
                 </Typography>
@@ -43,19 +43,21 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
 
             <List>
                 <ListItem>
-                    <Typography>
+                    <Typography variant="body2">
                         {strings.roomName}
                         {roomId}
                     </Typography>
                 </ListItem>
 
                 <ListItem>
-                    <Button variant="outlined" color="secondary" onClick={onLeaveRoom}>
-                        {strings.leaveRoom}
-                    </Button>
-                    <Button variant="outlined" onClick={onChangeName}>
-                        {strings.changeName}
-                    </Button>
+                    <ButtonGroup fullWidth>
+                        <Button variant="outlined" color="secondary" onClick={onLeaveRoom}>
+                            {strings.leaveRoom}
+                        </Button>
+                        <Button variant="outlined" onClick={onChangeName}>
+                            {strings.changeName}
+                        </Button>
+                    </ButtonGroup>
                 </ListItem>
 
                 <ListItem>
@@ -65,12 +67,14 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
                 </ListItem>
 
                 <ListItem>
-                    <Button variant="outlined" color="success" fullWidth onClick={onFlipCards}>
-                        {strings.flipCards}
-                    </Button>
-                    <Button variant="outlined" color="error" fullWidth onClick={onClearCards}>
-                        {strings.clearCards}
-                    </Button>
+                    <ButtonGroup fullWidth>
+                        <Button variant="outlined" color="success" fullWidth onClick={onFlipCards}>
+                            {strings.flipCards}
+                        </Button>
+                        <Button variant="outlined" color="error" fullWidth onClick={onClearCards}>
+                            {strings.clearCards}
+                        </Button>
+                    </ButtonGroup>
                 </ListItem>
             </List>
 

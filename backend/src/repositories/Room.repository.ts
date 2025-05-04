@@ -47,7 +47,7 @@ const addUser = (roomId: RoomId, user: User): void => {
 const setUserActivity = (roomId: RoomId, userId: UserId, active: boolean): void => {
     const room = getRoom(roomId);
     if (!room.users[userId]) {
-        console.error(`User ${userId} not found in room ${roomId}`);
+        console.warn(`User ${userId} not found in room ${roomId} so skip change activity`);
     } else {
         room.users[userId].active = active;
     }

@@ -18,17 +18,17 @@ const CardTable: FC = memo(() => {
     const { votesUp, votesDown } = useCardTableVotes(usersAndVotes, showCards);
 
     return (
-        <Stack className="taCardTable">
-            <Stack className="taBenchUp" direction="row" justifyContent="space-around" alignItems="center">
+        <Stack className="taCardTable" height={"100%"}>
+            <Stack height={"20%"} className="taBenchUp" direction="row" justifyContent="space-around" alignItems="center">
                 {usersUp}
             </Stack>
 
-            <Stack direction="row" className="taCardTableInner" position="relative">
+            <Stack height={"60%"} direction="row" className="taCardTableInner" position="relative">
                 <img
                     style={{
                         objectFit: "cover",
-                        width: tableSizeFactor * 585 + "px",
-                        height: tableSizeFactor * 917 + "px",
+                        maxWidth: tableSizeFactor * 585 + "px",
+                        maxHeight: tableSizeFactor * 917 + "px",
                     }}
                     src={leftImg}
                     loading="lazy"
@@ -51,7 +51,7 @@ const CardTable: FC = memo(() => {
                         //objectFit: "cover",
                         //width: factorHeight * 257 * 4 + "px",
                         width: "100%",
-                        height: tableSizeFactor * 917 + "px",
+                        maxHeight: tableSizeFactor * 917 + "px",
                     }}
                     src={centerImg}
                     loading="lazy"
@@ -72,8 +72,8 @@ const CardTable: FC = memo(() => {
                 <img
                     style={{
                         objectFit: "cover",
-                        width: tableSizeFactor * 585 + "px",
-                        height: tableSizeFactor * 917 + "px",
+                        maxWidth: tableSizeFactor * 585 + "px",
+                        maxHeight: tableSizeFactor * 917 + "px",
                     }}
                     src={rightImg}
                     loading="lazy"
@@ -81,7 +81,7 @@ const CardTable: FC = memo(() => {
                 />
             </Stack>
 
-            <Stack className="taBenchDown" direction="row" justifyContent="space-around" alignItems="center">
+            <Stack height={"20%"} className="taBenchDown" direction="row" justifyContent="space-around" alignItems="center">
                 {usersDown}
             </Stack>
         </Stack>

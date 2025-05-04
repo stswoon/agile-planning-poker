@@ -37,11 +37,13 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
             justifyContent="center"
             flexWrap="wrap"
             gap={0}
+            height="100%"
         >
             {avCards.map(({ value, side }) => (
                 <Box
                     key={value}
                     sx={{
+                        height: "50%",
                         width: "calc(12.5% - 4px)",
                         maxWidth: "120px",
                         margin: "2px",

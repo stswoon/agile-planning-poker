@@ -34,22 +34,25 @@ const UserOnTable: FC<UserOnTableProps> = memo(({ order, name, active }) => {
             alignItems="center"
             gap={0.5}
             sx={{ transition: "opacity 0.5s", opacity: active ? 1 : 0.5 }}
+            height="100%"
         >
             <img
                 style={{
                     objectFit: "cover",
-                    width: userSizeFactor * 350 + "px",
-                    height: userSizeFactor * 480 + "px",
+                    maxWidth: userSizeFactor * 350 + "px",
+                    maxHeight: userSizeFactor * 480 + "px",
+                    height: "100%",
                 }}
                 src={userIcons[order]}
                 loading="lazy"
                 alt={`Icon for user with order ${order}`}
             />
             <Typography
+                variant="body2"
                 width="70px"
-                height={userSizeFactor * 480 + "px"}
+                maxHeight={userSizeFactor * 480 + "px"}
                 overflow="hidden"
-                sx={{ wordBreak: "break-all" }}
+                sx={{ wordBreak: "break-word" }}
             >
                 {name}
             </Typography>

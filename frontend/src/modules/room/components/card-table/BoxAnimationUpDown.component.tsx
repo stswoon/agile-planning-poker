@@ -12,6 +12,7 @@ const BoxAnimationUpDown: FC<BoxAnimationUpDownProps> = memo(({ animationMode, c
     return (
         <Box
             sx={{
+                height: "100%",
                 animation: `${animationMode === "up" ? "slideUpAnimation" : "slideDownAnimation"} 1s ease-in`,
                 "@keyframes slideUpAnimation": {
                     "0%": { opacity: 0, transform: `translateY(${-upDownShift}px)` },
