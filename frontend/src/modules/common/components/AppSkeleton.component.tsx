@@ -28,7 +28,7 @@ const AppSkeleton: FC = memo(() => {
                                         key={value}
                                         variant="rounded"
                                         sx={{
-                                            width: `calc(${100/cards.length * 1.5}%)`,
+                                            width: `calc(${(100 / cards.length) * 1.5}%)`,
                                             height: "40%",
                                         }}
                                     />

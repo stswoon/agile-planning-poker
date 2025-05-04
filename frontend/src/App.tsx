@@ -23,7 +23,7 @@ const App: FC = memo(() => (
             <SnackbarProvider />
             <CookieAccept>
                 <BrowserRouter>
-                    <Suspense fallback={<AppSkeleton/>}>
+                    <Suspense fallback={<AppSkeleton />}>
                         <Routes>
                             <Route index element={<Home />} />
                             <Route path="/room/:roomId" element={<Room />} />
