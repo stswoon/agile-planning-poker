@@ -7,9 +7,9 @@
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "import": "./dist/my-lib.js",
-            "require": "./dist/my-lib.umd.cjs",
-            "types": "./dist/index.d.ts"
+            "require": "./dist/my-lib.umd.cjs"
         }
     },
     "files": [

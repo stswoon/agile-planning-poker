@@ -47,4 +47,5 @@ app.listen(envConfig.port, (error) => {
         throw error;
     }
     console.info(`Server running on port ${envConfig.port}`);
+    console.info(`You can open http://localhost:${envConfig.port}`);
 });

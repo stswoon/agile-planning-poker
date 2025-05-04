@@ -4,8 +4,9 @@ https://poker-planning.stswoon.ru/
 
 * How to create vite - https://vite.dev/guide/#scaffolding-your-first-vite-project
 * How to create node.js+express+typescript - https://blog.logrocket.com/express-typescript-node/
-
-https://onderonur.github.io/blog/creating-a-typescript-library-with-vite/
+* How to create vite lib - https://onderonur.github.io/blog/creating-a-typescript-library-with-vite/
+* NPM workspaces - https://medium.com/@90mandalchandan/mastering-npm-workspaces-a-comprehensive-guide-for-beginners-bc239c3c6223
+  * + https://habr.com/ru/articles/540114/
 
 
 //TODO: image, ad, link, link to all programs
