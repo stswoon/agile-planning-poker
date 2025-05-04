@@ -1,11 +1,13 @@
 import { FC, memo } from "react";
-import { Box, Divider, Toolbar, Drawer, Typography, Button, List, ListItem, ButtonGroup } from "@mui/material";
+import { Divider, Toolbar, Drawer, Typography, Button, List, ListItem, ButtonGroup, Link, Stack } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import { routes } from "../../../common/constants/Routes.constants.ts";
 import { useRoomStore } from "../../stores/Room.store.ts";
 import { useUserStore } from "../../../home/User.store.ts";
 import { YandexAd } from "../../../common/components/YandexAd.component.tsx";
 import { UserStatusList } from "./UserStatusList.component.tsx";
+import { CenterVertical } from "../../../common/components/CenterVertical.component.tsx";
+import { SCORE_BOARD_DRAWER_WIDTH } from "../../constants/HtmlPositioning.constants.ts";
 
 export interface ScoreBoardProps {
     onLeaveRoom: () => void;
@@ -25,7 +27,7 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
             className="taScoreBoard"
             sx={{
                 "& .MuiDrawer-paper": {
-                    width: "320px", //TODO const
+                    width: SCORE_BOARD_DRAWER_WIDTH + "px",
                     padding: "10px",
                 },
             }}
@@ -84,9 +86,12 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
 
             <Divider />
 
-            <Box className="AD" paddingTop={1} marginBottom="auto" height={"300px"}>
+            <Stack className="taBottomToolbar" paddingTop={1} marginTop="auto" height="300px" justifyContent="end">
                 <YandexAd />
-            </Box>
+                <CenterVertical>
+                    <Link href={strings.anotherProgram}>{strings.anotherProgram}</Link>
+                </CenterVertical>
+            </Stack>
         </Drawer>
     );
 });

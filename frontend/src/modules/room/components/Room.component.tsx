@@ -10,7 +10,7 @@ import { RoomLayout } from "./RoomLayout.component.tsx";
 import { CardTable } from "./card-table/CardTable.component.tsx";
 import { CardDeck } from "./card-deck/CardDeck.component.tsx";
 import { ScoreBoard } from "./score-board/ScoreBoard.component.tsx";
-import { testRooms } from "../constants/TestRoom.const.ts";
+import { testRooms } from "../constants/TestRoom.constants.ts";
 
 const Room: FC = memo(() => {
     const navigate = useNavigate();
@@ -97,9 +97,5 @@ const Room: FC = memo(() => {
 
 export { Room };
 
-//TODO: noyt screens
-//TODO: cookie
-//TODO your name
-//TODO: big js warning size,
 //TODO: lazy routing
 //TODO: move user store to common?

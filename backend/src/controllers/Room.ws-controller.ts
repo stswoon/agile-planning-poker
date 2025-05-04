@@ -16,7 +16,7 @@ const wsRoomRouter = (ws: WS, req: Request, next: NextFunction): void => {
         if (roomId && userId && userName) {
             createOrJoinRoom(ws, roomId, userId, userName);
         } else {
-            next(Error("Bad request"));
+            next(Error("Bad request, empty roomId or userId or userName"));
         }
     } catch (e) {
         // https://scoutapm.com/blog/express-error-handling

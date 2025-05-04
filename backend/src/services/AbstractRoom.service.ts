@@ -8,7 +8,7 @@ import { WS } from "../models/Ws.model";
 
 startCleanupOldRooms();
 
-const userLateRemoveTimers: JsMap<UserId, NodeJS.Timeout> = {};
+const userLateRemoveTimers: JsMap<UserId, JsMap<RoomId, NodeJS.Timeout>> = {};
 
 export function abstractCreateOrJoinRoom(
     ws: WS,
@@ -22,15 +22,14 @@ export function abstractCreateOrJoinRoom(
         roomRepository.createRoom(roomId);
     }
 
-    if (userLateRemoveTimers[userId]) {
+    if (userLateRemoveTimers[userId]?.[roomId] && roomRepository.getRoom(roomId).users[userId]) {
         console.log(`Reconnect user ${userName} (${userId}) to room ${roomId}`);
         roomRepository.setUserActivity(roomId, userId, true);
     } else {
         console.log(`Add user ${userName} (${userId}) to room ${roomId}`);
         roomRepository.addUser(roomId, { id: userId, name: userName, active: true });
     }
-    clearTimeout(userLateRemoveTimers[userId]);
-    delete userLateRemoveTimers[userId];
+    removeUserLateRemoveTimers(userId, roomId);
     roomUserWsMappingService.upsertUser(roomId, userId, ws);
 
     wsSubscription(ws, roomId, userId, userActionCallback);
@@ -42,7 +41,8 @@ export function abstractCreateOrJoinRoom(
 }
 
 function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallback: UserActionStrategy) {
-    const userName = roomRepository.getRoom(roomId).users[userId].name;
+    const users = roomRepository.getRoom(roomId).users;
+    const userName = users[userId].name;
     console.log(`Subscribe on user actions for ${userName} (${userId}) in room ${roomId}`);
     ws.on("message", (msg: string): void => {
         try {
@@ -64,9 +64,10 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
             console.log(a, b);
             roomUserWsMappingService.removeUser(roomId, userId);
             roomRepository.setUserActivity(roomId, userId, false);
-            userLateRemoveTimers[userId] = setTimeout(() => {
+            userLateRemoveTimers[userId] = userLateRemoveTimers[userId] ?? {};
+            userLateRemoveTimers[userId][roomId] = setTimeout(() => {
                 try {
-                    if (!userLateRemoveTimers[userId]) {
+                    if (!userLateRemoveTimers[userId]?.[roomId]) {
                         console.warn(
                             `Timeout for userId was cleared so skip deletion user ${userName} (${userId}) from room ${roomId}`,
                         );
@@ -75,7 +76,7 @@ function wsSubscription(ws: WS, roomId: RoomId, userId: UserId, userActionCallba
 
                     console.info(`Lazy remove for user (${userName} : ${userId}) in room (${roomId})`);
                     roomRepository.removeUser(roomId, userId);
-                    delete userLateRemoveTimers[userId];
+                    removeUserLateRemoveTimers(userId, roomId);
 
                     broadcastRoom(roomId);
 
@@ -124,6 +125,14 @@ function convertRoomToDto(room: Room): DtoRoom {
         showCards: room.showCards,
         usersAndVotes: userAndVotes,
     };
+}
+
+function removeUserLateRemoveTimers(userId: UserId, roomId: RoomId): void {
+    clearTimeout(userLateRemoveTimers[userId]?.[roomId]);
+    delete userLateRemoveTimers[userId]?.[roomId];
+    if (userLateRemoveTimers[userId] && Object.keys(userLateRemoveTimers[userId]).length === 0) {
+        delete userLateRemoveTimers[userId];
+    }
 }
 
 // const isEmptyRoom = (roomId: RoomId): boolean => {

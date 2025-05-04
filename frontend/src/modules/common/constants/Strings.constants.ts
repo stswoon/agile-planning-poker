@@ -19,4 +19,8 @@ export const strings = {
         part2: "Planning Poker",
         part3: ", a popular technique used in Agile development for collaboratively estimating user stories. Team members select their estimates anonymously, and the results are automatically revealed for discussion. It's ideal for remote teams and effective sprint planning.",
     },
+    anotherProgram: "https://stswoon.github.io",
+    cookieAccept:
+        "This site uses cookies for advertising. Click the button to accept the consent. If you do not agree, leave the site. Using the site without pressing the button to accept, also means your consent using cookies.",
+    cookieAcceptButton: "OK",
 };

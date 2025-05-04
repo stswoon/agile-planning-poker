@@ -5,7 +5,7 @@ import { strings } from "../common/constants/Strings.constants.ts";
 import { getRandomRoomId } from "../common/utils/Random.util.ts";
 import { useNavigate, useSearchParams } from "react-router";
 import { routes } from "../common/constants/Routes.constants.ts";
-import { CenterVertical } from "../common/components/CenterVertical.component.tsx";
+import { CenterBoth } from "../common/components/CenterBoth.component.tsx";
 
 const Home: FC = memo(() => {
     const navigate = useNavigate();
@@ -36,17 +36,17 @@ const Home: FC = memo(() => {
 
     return (
         <Box className="taHome" sx={{ height: "100vh" }}>
-            <CenterVertical>
+            <CenterBoth>
                 <Stack direction="column" gap={10}>
-                    <CenterVertical>
+                    <CenterBoth>
                         <Typography width={800} textAlign="justify" variant={"subtitle1"}>
                             {strings.description.part1}
                             <b>{strings.description.part2}</b>
                             {strings.description.part3}
                         </Typography>
-                    </CenterVertical>
+                    </CenterBoth>
 
-                    <CenterVertical>
+                    <CenterBoth>
                         <Stack direction="column" gap={2} width={400}>
                             <TextField
                                 label={strings.enterName}
@@ -78,9 +78,9 @@ const Home: FC = memo(() => {
                                 </Typography>
                             </Button>
                         </Stack>
-                    </CenterVertical>
+                    </CenterBoth>
 
-                    <CenterVertical>
+                    <CenterBoth>
                         <Box
                             sx={{
                                 border: "1px dashed black",
@@ -99,13 +99,11 @@ const Home: FC = memo(() => {
                                 alt={"Demo image for this poker planing"}
                             />
                         </Box>
-                    </CenterVertical>
+                    </CenterBoth>
                 </Stack>
-            </CenterVertical>
+            </CenterBoth>
         </Box>
     );
 });
 
 export { Home };
-
-//TODO: titile, meta, cookie, descr on start screen

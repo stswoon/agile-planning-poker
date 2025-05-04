@@ -3,6 +3,7 @@ import { FC, memo, useCallback, useMemo } from "react";
 import { Box, Stack, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
+import { BoxBlinkAnimation } from "../../../common/components/BoxBlinkAnimation.component.tsx";
 
 export interface UserStatusListProps {
     usersAndVotes: UserAndVote[];
@@ -51,8 +52,11 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
                         <TableRow key={userAndVote.user.id}>
                             <TableCell>
                                 <Stack direction="row" gap={0.5}>
-                                    {/*TODO: blink*/}
-                                    {!userAndVote.user.active && <NoAccountsIcon color="error" fontSize="small" />}
+                                    {!userAndVote.user.active && (
+                                        <BoxBlinkAnimation>
+                                            <NoAccountsIcon color="error" fontSize="small" />
+                                        </BoxBlinkAnimation>
+                                    )}
                                     <Typography
                                         variant="body2"
                                         fontWeight={userAndVote.user.id === currentUserId ? "bold" : undefined}

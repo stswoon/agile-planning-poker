@@ -1,12 +1,12 @@
 import { FC, memo, useEffect, useState } from "react";
 import { Box, Stack } from "@mui/material";
-import { PokerCard } from "../poker-card/PokerCard.component.tsx";
+import { PokerCard, PokerCardProps } from "../poker-card/PokerCard.component.tsx";
 import { utils } from "@stswoon/shared";
 
 const availableCardValues = [0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 50, "?"];
-const avCardsInit: { value: string | number; side: "front" | "back" }[] = availableCardValues.map((value) => {
+const avCardsInit: PokerCardProps[] = availableCardValues.map((value) => {
     return { value, side: "back" };
-}); //TODO: use PokerCardProps
+});
 
 export interface CardDeckProps {
     onThrowCard: (cardValue: number | string) => void;
@@ -60,3 +60,5 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
 });
 
 export { CardDeck };
+
+//TODO: rename to agili planning pocker

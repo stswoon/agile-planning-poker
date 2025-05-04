@@ -1,0 +1,1 @@
+export const SCORE_BOARD_DRAWER_WIDTH = 320;
