@@ -69,7 +69,9 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
                                     </Stack>
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Typography noWrap variant="body2">{displayCardValue(userAndVote.vote?.cardValue)}</Typography>
+                                    <Typography noWrap variant="body2">
+                                        {displayCardValue(userAndVote.vote?.cardValue)}
+                                    </Typography>
                                 </TableCell>
                             </TableRow>
                         ))}

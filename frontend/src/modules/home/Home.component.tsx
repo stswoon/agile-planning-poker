@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, memo, useCallback, useEffect } from "react";
-import { useUserStore } from "./User.store.ts";
+import { useUserStore } from "../common/stores/User.store.ts";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { strings } from "../common/constants/Strings.constants.ts";
 import { getRandomRoomId } from "../common/utils/Random.util.ts";

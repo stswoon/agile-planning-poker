@@ -1,11 +1,20 @@
 import { ThemeProvider } from "@mui/material";
 import { muiTheme } from "./modules/common/constants/MuiTheme.constants.ts";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import { FC, memo } from "react";
-import { Home } from "./modules/home/Home.component.tsx";
-import { Room } from "./modules/room/components/Room.component.tsx";
+import { FC, lazy, memo, Suspense } from "react";
+// import { Home } from "./modules/home/Home.component.tsx";
+// import { Room } from "./modules/room/components/Room.component.tsx";
 import { CookieAccept } from "./modules/common/components/CookieAccept.component.tsx";
 import { SnackbarProvider } from "notistack";
+
+const Home = lazy(async () => {
+    const module = await import("./modules/home/Home.component.tsx");
+    return { default: module.Home };
+});
+const Room = lazy(async () => {
+    const module = await import("./modules/room/components/Room.component.tsx");
+    return { default: module.Room };
+});
 
 const App: FC = memo(() => (
     <div className="taApp">
@@ -13,11 +22,14 @@ const App: FC = memo(() => (
             <SnackbarProvider />
             <CookieAccept>
                 <BrowserRouter>
-                    <Routes>
-                        <Route index element={<Home />} />
-                        <Route path="/room/:roomId" element={<Room />} />
-                        <Route path="*" element={<Navigate to="/" replace />} />
-                    </Routes>
+                    {/*//TODO: skeleton*/}
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Routes>
+                            <Route index element={<Home />} />
+                            <Route path="/room/:roomId" element={<Room />} />
+                            <Route path="*" element={<Navigate to="/" replace />} />
+                        </Routes>
+                    </Suspense>
                 </BrowserRouter>
             </CookieAccept>
         </ThemeProvider>

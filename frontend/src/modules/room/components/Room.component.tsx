@@ -1,7 +1,7 @@
 import { FC, memo, useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { ClearCardsUserAction, FlipCardUserAction, UserActionType, VoteUserAction } from "@stswoon/shared";
-import { useUserStore } from "../../home/User.store.ts";
+import { useUserStore } from "../../common/stores/User.store.ts";
 import { useWebSocket } from "../../common/hooks/UseWebSocket.hook.ts";
 import { routes } from "../../common/constants/Routes.constants.ts";
 import { useRoomStore } from "../stores/Room.store.ts";
@@ -55,10 +55,10 @@ const Room: FC = memo(() => {
     }, [error]);
 
     useEffect(() => {
-        if (isConnecting) {
+        if (isConnecting && message) {
             notify("Connecting to WS", "warning");
         }
-    }, [isConnecting]);
+    }, [isConnecting, message]);
 
     const handleThrowCard = useCallback(
         (cardValue: number | string) => {
@@ -111,7 +111,3 @@ const Room: FC = memo(() => {
 });
 
 export { Room };
-
-//TODO: lazy routing
-//TODO: move user store to common?
-//TODO: js chank warning

@@ -61,4 +61,3 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
 });
 
 export { CardDeck };
-

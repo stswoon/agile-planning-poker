@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { UserId } from "@stswoon/shared";
 import { devtools } from "zustand/middleware";
 import { persist } from "zustand/middleware";
-import { getRandomShortId, getRandomUserName } from "../common/utils/Random.util.ts";
+import { getRandomShortId, getRandomUserName } from "../utils/Random.util.ts";
 import { UserStore } from "./UserStore.model.ts";
 
 export const useUserStore = create<UserStore>()(
