@@ -17,4 +17,5 @@ https://poker-planning.stswoon.ru/
 - сгенерируй еще 5 лиц
 
 
-//TODO: TC - go between rooms and wait - it cause Broadcast room red-booby8 to usersId: [] - so no state got to FE - so FE not shows user 
+//TODO: TC - go between rooms and wait - it cause Broadcast room red-booby8 to usersId: [] - so no state got to FE - so FE not shows user
+//TODO: rename to agile planning pocker

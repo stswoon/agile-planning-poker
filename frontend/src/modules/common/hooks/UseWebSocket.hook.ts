@@ -3,7 +3,7 @@ import { WsService } from "../services/Ws.service.ts";
 
 export function useWebSocket(url: string) {
     const wsServiceRef = useRef<WsService>(null);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState<string | undefined>(undefined);
     const [isConnecting, setIsConnecting] = useState(true);
     const [message, setMessage] = useState<string | undefined>();
 
@@ -15,7 +15,7 @@ export function useWebSocket(url: string) {
                 setMessage(message);
             },
             (error) => {
-                setIsError(!!error);
+                setError(error);
             },
             (loading) => {
                 setIsConnecting(loading);
@@ -38,5 +38,5 @@ export function useWebSocket(url: string) {
         }
     };
 
-    return { message, sendMessage, isError, isConnecting };
+    return { message, sendMessage, error, isConnecting };
 }

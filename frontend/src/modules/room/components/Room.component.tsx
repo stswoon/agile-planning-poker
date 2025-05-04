@@ -11,6 +11,7 @@ import { CardTable } from "./card-table/CardTable.component.tsx";
 import { CardDeck } from "./card-deck/CardDeck.component.tsx";
 import { ScoreBoard } from "./score-board/ScoreBoard.component.tsx";
 import { testRooms } from "../constants/TestRoom.constants.ts";
+import { notify } from "../../common/utils/Notification.util.tsx";
 
 const Room: FC = memo(() => {
     const navigate = useNavigate();
@@ -20,9 +21,9 @@ const Room: FC = memo(() => {
     const userId = useUserStore((state) => state.localUser.id);
     const userName = useUserStore((state) => state.localUser.name);
 
-    const setRoom = useRoomStore((state) => state.setRoom); //TODO: move to store
+    const setRoom = useRoomStore((state) => state.setRoom);
 
-    const { message, sendMessage, isError, isConnecting } = useWebSocket(routes.wsRoomApi(roomId, userId, userName));
+    const { message, sendMessage, error, isConnecting } = useWebSocket(routes.wsRoomApi(roomId, userId, userName));
 
     useEffect(() => {
         if (__DEV_MODE__) {
@@ -40,11 +41,24 @@ const Room: FC = memo(() => {
 
         if (message) {
             const room: RoomExtended = JSON.parse(message);
-            room.isError = isError; //TODO: test
-            room.isLoading = isConnecting; //TODO: test
+            room.isError = !!error;
+            room.isLoading = isConnecting;
             setRoom(room);
         }
-    }, [isConnecting, isError, message, roomId, setRoom]);
+    }, [isConnecting, error, message, roomId, setRoom]);
+
+    useEffect(() => {
+        if (error) {
+            console.error("Error with WS: " + error);
+            notify("Error with WS: " + error, "error");
+        }
+    }, [error]);
+
+    useEffect(() => {
+        if (isConnecting) {
+            notify("Connecting to WS", "warning");
+        }
+    }, [isConnecting]);
 
     const handleThrowCard = useCallback(
         (cardValue: number | string) => {
@@ -89,6 +103,7 @@ const Room: FC = memo(() => {
                     onLeaveRoom={handleLeaveRoom}
                     onFlipCards={handleFlipCards}
                     onClearCards={handleClearCards}
+                    isLoading={isConnecting}
                 />
             }
         />

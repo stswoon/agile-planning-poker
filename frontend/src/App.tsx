@@ -5,10 +5,12 @@ import { FC, memo } from "react";
 import { Home } from "./modules/home/Home.component.tsx";
 import { Room } from "./modules/room/components/Room.component.tsx";
 import { CookieAccept } from "./modules/common/components/CookieAccept.component.tsx";
+import { SnackbarProvider } from "notistack";
 
 const App: FC = memo(() => (
     <div className="taApp">
         <ThemeProvider theme={muiTheme}>
+            <SnackbarProvider />
             <CookieAccept>
                 <BrowserRouter>
                     <Routes>

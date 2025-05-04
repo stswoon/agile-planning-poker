@@ -62,4 +62,3 @@ const CardDeck: FC<CardDeckProps> = memo(({ onThrowCard }) => {
 
 export { CardDeck };
 
-//TODO: rename to agili planning pocker

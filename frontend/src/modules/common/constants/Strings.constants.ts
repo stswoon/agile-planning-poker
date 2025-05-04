@@ -23,4 +23,5 @@ export const strings = {
     cookieAccept:
         "This site uses cookies for advertising. Click the button to accept the consent. If you do not agree, leave the site. Using the site without pressing the button to accept, also means your consent using cookies.",
     cookieAcceptButton: "OK",
+    closeNotification: "Dismiss",
 };

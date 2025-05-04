@@ -1,5 +1,18 @@
 import { FC, memo } from "react";
-import { Divider, Toolbar, Drawer, Typography, Button, List, ListItem, ButtonGroup, Link, Stack } from "@mui/material";
+import {
+    Divider,
+    Toolbar,
+    Drawer,
+    Typography,
+    Button,
+    List,
+    ListItem,
+    ButtonGroup,
+    Link,
+    Stack,
+    CircularProgress,
+    Box,
+} from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import { routes } from "../../../common/constants/Routes.constants.ts";
 import { useRoomStore } from "../../stores/Room.store.ts";
@@ -14,9 +27,11 @@ export interface ScoreBoardProps {
     onChangeName: () => void;
     onFlipCards: () => void;
     onClearCards: () => void;
+
+    isLoading?: boolean;
 }
 
-const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFlipCards, onClearCards }) => {
+const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFlipCards, onClearCards, isLoading }) => {
     const currentUserId = useUserStore((state) => state.localUser.id);
     const roomId = useRoomStore((state) => state.room.id);
     const usersAndVotes = useRoomStore((state) => state.room.usersAndVotes);
@@ -39,6 +54,12 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
                     {strings.appName} {strings.appVersionPrefix}
                     {__APP_VERSION__}
                 </Typography>
+
+                {isLoading && (
+                    <Box paddingLeft={2}>
+                        <CircularProgress size="20px" />
+                    </Box>
+                )}
             </Toolbar>
 
             <Divider />

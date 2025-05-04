@@ -28,6 +28,9 @@ export class WsService {
     private wsPingIntervalId?: ReturnType<typeof setTimeout>;
     private closedNormally: boolean = false;
 
+    private wsHeartbeatTimeoutId?: ReturnType<typeof setTimeout>;
+    private wsTry: number = 0;
+
     constructor(url: string, onMessage: OnMessageCallback, onError: OnErrorCallback, onLoading: OnLoadingCallback) {
         console.debug(`RoomService.__id=${this.__id}`);
 
@@ -68,12 +71,9 @@ export class WsService {
             this.ws?.close(5000, "Client 30 sec timeout");
         }, CONNECTION_TIMEOUT);
 
-        let wsHeartbeatTimeoutId;
-        let wsTry = 0;
-
         this.ws.onopen = () => {
             console.info("WS connected");
-            wsTry = 0;
+            this.wsTry = 0;
             clearTimeout(wsConnectionTimeoutId);
             clearTimeout(this.wsPingIntervalId);
 
@@ -95,9 +95,10 @@ export class WsService {
                     return;
                 }
                 console.error("WS interrupted");
-                if (wsTry < MAX_TRIES) {
-                    console.log("Try connect again");
-                    setTimeout(() => this.attachWsToRoom(), ++wsTry * 1000);
+                if (this.wsTry < MAX_TRIES) {
+                    console.log(`Try connect again: wsTry=${this.wsTry}/${MAX_TRIES}`);
+                    this.wsTry++;
+                    setTimeout(() => this.attachWsToRoom(), this.wsTry * 1000);
                 } else {
                     console.error("SYSTEM ERROR: Can't connect to server, achieved max count of attempts");
                     // alert("SYSTEM ERROR: Can't connect to server");
@@ -105,12 +106,12 @@ export class WsService {
                     this.onLoading(false);
                 }
             }
-            clearTimeout(wsHeartbeatTimeoutId);
+            clearTimeout(this.wsHeartbeatTimeoutId);
             console.debug(`WS error code ${event.code} and reason ${event.reason}`);
         };
 
         this.ws.onerror = (error: unknown) => {
-            clearTimeout(wsHeartbeatTimeoutId);
+            clearTimeout(this.wsHeartbeatTimeoutId);
             console.debug("WS error:" + (error as { message: string }).message);
             // this.onError("SYSTEM ERROR: Can't connect to server");
         };
