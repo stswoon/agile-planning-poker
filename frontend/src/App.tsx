@@ -6,6 +6,7 @@ import { FC, lazy, memo, Suspense } from "react";
 // import { Room } from "./modules/room/components/Room.component.tsx";
 import { CookieAccept } from "./modules/common/components/CookieAccept.component.tsx";
 import { SnackbarProvider } from "notistack";
+import { AppSkeleton } from "./modules/common/components/AppSkeleton.component.tsx";
 
 const Home = lazy(async () => {
     const module = await import("./modules/home/Home.component.tsx");
@@ -22,8 +23,7 @@ const App: FC = memo(() => (
             <SnackbarProvider />
             <CookieAccept>
                 <BrowserRouter>
-                    {/*//TODO: skeleton*/}
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<AppSkeleton/>}>
                         <Routes>
                             <Route index element={<Home />} />
                             <Route path="/room/:roomId" element={<Room />} />

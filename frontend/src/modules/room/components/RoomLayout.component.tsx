@@ -22,13 +22,13 @@ const RoomLayout: FC<AppLayoutType> = memo(({ cardTable, cardDeck, scoreBoard, c
                 height: "calc(100vh - 20px)", //20 px to save on horizontal scroll
             }}
         >
-            <Stack direction="row" sx={{ height: "100%" }}>
+            <Stack direction="row" height="100%">
                 <Stack sx={{ width: `calc(100% - ${SCORE_BOARD_DRAWER_WIDTH}px)`, height: "100%" }} gap={1}>
-                    <Box sx={{ height: "60%" }} paddingRight={1} paddingLeft={1}>
+                    <Box height="60%" paddingRight={1} paddingLeft={1}>
                         <CenterHorizontal>{cardTable}</CenterHorizontal>
                     </Box>
                     <Divider />
-                    <Box sx={{ height: "40%" }}>
+                    <Box height="40%">
                         <CenterHorizontal>{cardDeck}</CenterHorizontal>
                     </Box>
                 </Stack>
