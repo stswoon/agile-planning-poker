@@ -18,5 +18,6 @@ export const routes = {
         return `${wsProtocol}://${wsHost}/api/room?roomId=${roomId}&userId=${userId}&userName=${userName}`;
     },
 
-    donate: "https://yoomoney.ru/to/41001998657825",
+    donateYoomoney: "https://yoomoney.ru/to/41001998657825",
+    donateStripe: "https://buy.stripe.com/test_9B69AT4mAbiJ49V7vgdQQ00",
 };

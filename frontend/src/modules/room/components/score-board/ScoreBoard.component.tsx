@@ -84,8 +84,13 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
                 </ListItem>
 
                 <ListItem>
-                    <Button variant="text" color="warning" fullWidth href={routes.donate}>
-                        {strings.donate}
+                    <Button variant="text" color="warning" fullWidth href={routes.donateStripe}>
+                        {strings.donateStripe}
+                    </Button>
+                </ListItem>
+                <ListItem>
+                    <Button variant="text" color="warning" fullWidth href={routes.donateYoomoney}>
+                        {strings.donateYoomoney}
                     </Button>
                 </ListItem>
 
