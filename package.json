@@ -1,6 +1,6 @@
 {
     "name": "poker-planning-2",
-    "version": "2.1.6",
+    "version": "2.1.7",
     "description": "Service to be able to play in agile game called porker planing",
     "scripts": {
         "dev:fe": "npm run dev --prefix frontend",
@@ -9,8 +9,8 @@
         "prod": "npm run prod --prefix shared && npm run prod --prefix frontend && npm run prod --prefix backend && npm run copy-statics",
         "-----": "echo 0",
         "copy-statics": "node build.helper.mjs --copyStatics",
-        "after-install": "npm i --prefix frontend && npm i --prefix backend && npm i --prefix shared",
-        "after-ci": "npm ci --prefix frontend && npm ci --prefix backend && npm ci --prefix shared",
+        "after-install": "npm i --prefix frontend && npm i --prefix backend",
+        "after-ci": "npm ci --prefix frontend && npm ci --prefix backend",
         "patch-version": "node build.helper.mjs --updatePatchVersion && git add -A",
         "lint:staged": "npm run lint:staged --prefix frontend && npm run lint:staged --prefix backend",
         "lint:prettier:fix": "npm run lint:prettier:fix --prefix frontend && npm run lint:prettier:fix --prefix backend",
