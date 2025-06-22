@@ -10,7 +10,7 @@ import { RoomLayout } from "./RoomLayout.component.tsx";
 import { CardTable } from "./card-table/CardTable.component.tsx";
 import { CardDeck } from "./card-deck/CardDeck.component.tsx";
 import { ScoreBoard } from "./score-board/ScoreBoard.component.tsx";
-import { testRooms } from "../constants/TestRoom.constants.ts";
+import { testRooms } from "../../../tests/TestRoom.constants.ts";
 import { notify } from "../../common/utils/Notification.util.tsx";
 
 const Room: FC = memo(() => {

@@ -16,6 +16,8 @@ import u12 from "../../../../assets/users/12.webp";
 import u13 from "../../../../assets/users/13.webp";
 import u14 from "../../../../assets/users/14.webp";
 
+import noMoreUserIcon from "../../../../assets/NoMoreUserIcon.webp";
+
 const userIcons = [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14];
 
 const userSizeFactor = 0.2;
@@ -43,7 +45,7 @@ const UserOnTable: FC<UserOnTableProps> = memo(({ order, name, active }) => {
                     maxHeight: userSizeFactor * 480 + "px",
                     height: "100%",
                 }}
-                src={userIcons[order]}
+                src={userIcons[order] ?? noMoreUserIcon}
                 loading="lazy"
                 alt={`Icon for user with order ${order}`}
             />
