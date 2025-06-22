@@ -46,11 +46,9 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
 
     return (
         <Box className="taUserStatusList">
-            <Stack flexDirection='row' padding={2}>
-                <Typography variant="h6">
-                    {strings.average}
-                </Typography>
-                <Typography variant="h6" display='flex' alignItems='center' paddingLeft={1}>
+            <Stack flexDirection="row" padding={2}>
+                <Typography variant="h6">{strings.average}</Typography>
+                <Typography variant="h6" display="flex" alignItems="center" paddingLeft={1}>
                     {displayAverage}
                 </Typography>
             </Stack>
