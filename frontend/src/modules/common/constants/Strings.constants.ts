@@ -2,7 +2,7 @@ export const strings = {
     enterName: "Enter your name",
     createRoom: "Create Room",
     backToRoom: "Back to Room",
-    appName: "Planning Poker",
+    appName: "Agile Planning Poker",
     appVersionPrefix: "v.",
     leaveRoom: "Leave Room",
     changeName: "Change Name",
