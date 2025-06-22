@@ -6,8 +6,11 @@ export const strings = {
     appVersionPrefix: "v.",
     leaveRoom: "Leave Room",
     changeName: "Change Name",
-    donateYoomoney: "Donate (yoomoney)",
-    donateStripe: "Donate (stripe)",
+    donate: {
+        prefix: "Donate",
+        yoomoney: "(yoomoney)",
+        stripe: "(stripe)",
+    },
     flipCards: "Flip Cards",
     clearCards: "Clear Cards",
     noCard: "Empty",
@@ -24,5 +27,5 @@ export const strings = {
     cookieAccept:
         "This site uses cookies for advertising. Click the button to accept the consent. If you do not agree, leave the site. Using the site without pressing the button to accept, also means your consent using cookies.",
     cookieAcceptButton: "OK",
-    closeNotification: "Dismiss",
+    roomCopySuccessMessage: "Room link copied",
 };

@@ -4,6 +4,7 @@ import { Box, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typo
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import { BoxBlinkAnimation } from "../../../common/components/BoxBlinkAnimation.component.tsx";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export interface UserStatusListProps {
     usersAndVotes: UserAndVote[];
@@ -17,6 +18,9 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
             const userWithCards = usersAndVotes.filter(
                 (userAndVote) => typeof userAndVote.vote?.cardValue === "number",
             );
+            if (!userWithCards.length) {
+                return strings.noCard;
+            }
             let average: number = userWithCards.reduce(
                 (acc: number, userAndVote: UserAndVote) => acc + (userAndVote.vote?.cardValue as number),
                 0,
@@ -25,7 +29,7 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
             average = Math.round(average * 10) / 10;
             return average;
         } else {
-            return strings.hiddenCardValue;
+            return <VisibilityOffIcon />;
         }
     }, [showCards, usersAndVotes]);
 
@@ -42,10 +46,15 @@ const UserStatusList: FC<UserStatusListProps> = memo(({ usersAndVotes, showCards
 
     return (
         <Box className="taUserStatusList">
-            <Typography variant="h6" padding={2}>
-                {strings.average}
-                {displayAverage}
-            </Typography>
+            <Stack flexDirection='row' padding={2}>
+                <Typography variant="h6">
+                    {strings.average}
+                </Typography>
+                <Typography variant="h6" display='flex' alignItems='center' paddingLeft={1}>
+                    {displayAverage}
+                </Typography>
+            </Stack>
+
             <TableContainer sx={{ maxHeight: 440 }}>
                 <Table size="small">
                     <TableBody>

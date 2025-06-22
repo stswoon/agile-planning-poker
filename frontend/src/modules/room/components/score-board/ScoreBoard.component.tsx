@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { FC, memo, useCallback } from "react";
 import {
     Divider,
     Toolbar,
@@ -12,6 +12,7 @@ import {
     Stack,
     CircularProgress,
     Box,
+    IconButton,
 } from "@mui/material";
 import { strings } from "../../../common/constants/Strings.constants.ts";
 import { routes } from "../../../common/constants/Routes.constants.ts";
@@ -21,6 +22,8 @@ import { YandexAd } from "../../../common/components/YandexAd.component.tsx";
 import { UserStatusList } from "./UserStatusList.component.tsx";
 import { CenterVertical } from "../../../common/components/CenterVertical.component.tsx";
 import { SCORE_BOARD_DRAWER_WIDTH } from "../../constants/HtmlPositioning.constants.ts";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { notify } from "../../../common/utils/Notification.util.tsx";
 
 export interface ScoreBoardProps {
     onLeaveRoom: () => void;
@@ -36,6 +39,16 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
     const roomId = useRoomStore((state) => state.room.id);
     const usersAndVotes = useRoomStore((state) => state.room.usersAndVotes);
     const isShowCards = useRoomStore((state) => state.room.showCards);
+
+    const copyRoomUrl = useCallback(async () => {
+        const url = window.location.toString();
+        try {
+            await navigator.clipboard.writeText(url);
+            notify(strings.roomCopySuccessMessage, "info");
+        } catch (err) {
+            console.error("Failed to copy text: ", err);
+        }
+    }, []);
 
     return (
         <Drawer
@@ -54,7 +67,6 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
                     {strings.appName} {strings.appVersionPrefix}
                     {__APP_VERSION__}
                 </Typography>
-
                 {isLoading && (
                     <Box paddingLeft={2}>
                         <CircularProgress size="20px" />
@@ -70,6 +82,9 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
                         {strings.roomName}
                         {roomId}
                     </Typography>
+                    <IconButton onClick={copyRoomUrl}>
+                        <ContentCopyIcon />
+                    </IconButton>
                 </ListItem>
 
                 <ListItem>
@@ -85,12 +100,16 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
 
                 <ListItem>
                     <Button variant="text" color="warning" fullWidth href={routes.donateStripe}>
-                        {strings.donateStripe}
+                        <Stack>
+                            <Typography variant="body2">{strings.donate.prefix}</Typography>
+                            <Typography variant="body2">{strings.donate.stripe}</Typography>
+                        </Stack>
                     </Button>
-                </ListItem>
-                <ListItem>
                     <Button variant="text" color="warning" fullWidth href={routes.donateYoomoney}>
-                        {strings.donateYoomoney}
+                        <Stack>
+                            <Typography variant="body2">{strings.donate.prefix}</Typography>
+                            <Typography variant="body2">{strings.donate.yoomoney}</Typography>
+                        </Stack>
                     </Button>
                 </ListItem>
 
@@ -112,7 +131,7 @@ const ScoreBoard: FC<ScoreBoardProps> = memo(({ onLeaveRoom, onChangeName, onFli
 
             <Divider />
 
-            <Stack className="taBottomToolbar" paddingTop={1} marginTop="auto" height="300px" justifyContent="end">
+            <Stack className="taBottomToolbar" paddingTop={1} marginTop="auto" height="100px" justifyContent="end">
                 <YandexAd />
                 <CenterVertical>
                     <Link href={strings.anotherProgram}>{strings.anotherProgram}</Link>
