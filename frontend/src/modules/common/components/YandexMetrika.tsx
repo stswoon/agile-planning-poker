@@ -1,6 +1,6 @@
 import { FC, memo, useEffect } from "react";
 
-const yandexMetrikaId = "102915080";
+const yandexMetrikaId = 102915080;
 
 const YandexMetrika: FC = memo(() => {
     useEffect(() => {
@@ -23,7 +23,7 @@ const YandexMetrika: FC = memo(() => {
                         window.ym.a.push(args);
                     };
                 window.ym.l = new Date().getTime();
-                window.ym(102915080, "init", {
+                window.ym(yandexMetrikaId, "init", {
                     clickmap: true,
                     trackLinks: true,
                     accurateTrackBounce: true,
